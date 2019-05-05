@@ -4,13 +4,13 @@ Complete this pattern to build a simple blockchain network using Hyperledger Fab
 
 Audience level: Intermediate Developers
 
-##Prerequisites
+## Prerequisites
 
 1. Free [IBM Cloud account](https://ibm.biz/Bd2t6h)
 2. The VirtualBox image containing Hyperledger Fabric and all other pre-reqs to complete this pattern
 3. VirtualBox 6.x
 
-##Overview
+## Overview
 The image below gives a high level overview of the scenario described above and will form the basis of our demo application. This idea is taken from the 'Tracking Donations with blockchain' code pattern and modified so that it can also be deployed to the IBM Blockchain Platform V2.0 service
 
 ![](./images/01-overview-1.png)  
