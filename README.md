@@ -209,19 +209,21 @@ The last part of this section is to deploy the smart contract to our blockchain 
 
 ![](./images/16-build-service-6.png)
 
-Next, choose your `smart-contract` folder as workspace folder to package (1). The result should be a `global-citizen@0.0.1` package under the Smart Contract Packages view. The final step in this section is to test whether the smart contract was successfully deployed. For this, click on the contract in the Fabric Gateways panel (expend local_fabric, then click mychannel -> global-citizen@0.0.1). Now, click the createProjectPledge (1) method and select 'Submit Transaction' (2).
+Next, choose your `smart-contract` folder as workspace folder to package (1). 
 
 ![](./images/17-build-service-7.png)
 
+The result should be a `global-citizen@0.0.1` package under the Smart Contract Packages view. The final step in this section is to test whether the smart contract was successfully deployed. For this, click on the contract in the Fabric Gateways panel (expend local_fabric, then click mychannel -> global-citizen@0.0.1). Now, click the createProjectPledge (1) method and select 'Submit Transaction' (2).
+
+![](./images/18-build-service-8.png)
+
 Pass the following arguments to the function and hit Enter.
 
-```
-aid1,001,test fund,test fund desc,100000
-```
+![](./images/19-build-service-9.png)
 
 The transaction should complete successfully. Finally, test whether you can read the project pledge by invoking the `readProjectPledge` function. Pass `aid1:001` as pledgeId and check if the response matches the screenshot below.
 
-![](./images/18-build-service-8.png)
+![](./images/20-build-service-10.png)
 
 ## 4. Connecting all parts
 
