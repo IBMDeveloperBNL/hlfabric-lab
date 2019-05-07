@@ -612,5 +612,7 @@ The result should be similar to
 
 ![](./images/38-connecting-parts-18.png)
 
-**CONGRATULATIONS!!** :smiley: :+1: You successfully created a blockchain application that is capable of tracking donations according to the simplified business scenario mentioned at the top of this pattern. Next, play around with the dashboard and create some additional project pledges and query them. Have a look at the 'Blockchain' log in Visual Code to see that your dashboard activities -- via the business service and the smart contract -- actually transact with the blockchain network.
+**CONGRATULATIONS!!** :smiley: :+1: 
+
+You successfully created a blockchain application that is capable of tracking donations according to the simplified business scenario mentioned at the top of this pattern. Next, play around with the dashboard and create some additional project pledges and query them. Have a look at the 'Blockchain' log in Visual Code to see that your dashboard activities -- via the business service and the smart contract -- actually transact with the blockchain network.
 
