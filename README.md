@@ -38,7 +38,7 @@ Give the service a unique name (1) and select a nearby region to deploy to (e.g.
 
 ![](./images/04-nodered-2.png)
 
-The deployment takes a couple of minutes to complete, so you might want to move on to part 2 and start the creation of your business service and return later to complete the setup of your frontend.
+The deployment takes a couple of minutes to complete, so you might want to move on to [Part 2](#2-build-the-business-service) and start the creation of your business service and return later to complete the setup of your frontend.
 
 Once the deployment is successfully completed, visit the app URL by clicking (1) on the image below.
 
@@ -109,18 +109,9 @@ Try to invoke one of the endpoints (e.g. createProjectPledge) by clicking on the
 The response will be a 500 internal server error. The reason for this is, that this is the current implementation of the service. It throws exactly this error message.
 
 ```ts
-/**
- * The controller class is generated from OpenAPI spec with operations tagged
- * by CreateProjectPledgeController
- * 
- */
 export class CreateProjectPledgeController {
   constructor() {}
-
-  /**
-   * 
-   * 
-
+  /*
    * @param _requestBody 
    * @returns ResponseMessage model instance
    */
@@ -128,7 +119,6 @@ export class CreateProjectPledgeController {
   async createProjectPledgeCreate(@requestBody() _requestBody: CreateProjectPledge): Promise<ResponseMessage> {
     throw new Error('Not implemented');
   }
-
 }
 ```
 
@@ -136,7 +126,11 @@ It is our job to implement the business service in a meaningful way. This is don
 
 ## 3. Build the Smart Contract
 
-Typically, business rules that need to be executed --- before a transaction can be recorded on the blockchain --- are captured in a so-called smart contract, also referred to as chaincode in Hyperledger Fabric. As this is an important part of our application, it is good to get familiar with the basics of smart contract development in Hyperledger Fabric. For this, we will follow the beginner tutorial that is part of the IBM Blockchain extension in Visual Code. After you completed the tutorial you should have a better understanding of how to develop and debug smart contracts, but also of how to deploy them to your network. The IBM blockchain extension itself is built to provide developers an integrated workflow for building blockchain applictions. To get started with the tutorial, click on the Visual Code launcher in your VirtualBox image.
+Typically, business rules that need to be executed --- before a transaction can be recorded on the blockchain --- are captured in a so-called smart contract, also referred to as chaincode in Hyperledger Fabric. As this is an important part of our application, it is good to get familiar with the basics of smart contract development in Hyperledger Fabric. 
+
+For this, we will follow the beginner tutorial that is part of the IBM Blockchain extension in Visual Code. After you completed the tutorial you should have a better understanding of how to develop and debug smart contracts as well as of how to deploy them to your network. The IBM blockchain extension itself is built to provide developers an integrated workflow for building blockchain applictions. 
+
+To get started with the tutorial, click on the Visual Code launcher in your VirtualBox image.
 
 ![](./images/13-smart-contract-1.png)
 
@@ -151,28 +145,28 @@ At this point, you have completed the tutorial and gained basic knowledge on sma
 Now inspect the `smart contract` folder. The structure of the project is similar to the one from the tutorial. There are 2 assets and 5 transactions. The transactions are defined and implemented in the file `src/my-projectpledge-contract.ts`. Take a look at the `createProjectPledge` transaction.
 
 ```ts
-    @Transaction()
-    async createProjectPledge(ctx: Context, aidOrg: string, pledgeNumber: string, name: string, description: string, fundsRequired: number): Promise<void> {
-        const pledgeId = aidOrg + ':' + pledgeNumber;
-        const exists = await this.projectPledgeExists(ctx, pledgeId);
+@Transaction()
+async createProjectPledge(ctx: Context, aidOrg: string, pledgeNumber: string, name: string, description: string, fundsRequired: number): Promise<void> {
+    const pledgeId = aidOrg + ':' + pledgeNumber;
+    const exists = await this.projectPledgeExists(ctx, pledgeId);
 
-        if (exists) {
-            throw new Error(`The project pledge ${pledgeId} already exists`);
-        }
-
-        // create an instance of the project pledge
-        let pledge = new ProjectPledge();
-
-        pledge.pledgeNumber = pledgeNumber;
-        pledge.aidOrg = aidOrg;
-        pledge.name = name;
-        pledge.description = description;
-        pledge.fundsRequired = fundsRequired;
-        pledge.status = ppState.INITIALSTATE;
-
-        const buffer = Buffer.from(JSON.stringify(pledge));
-        await ctx.stub.putState(pledgeId, buffer);
+    if (exists) {
+        throw new Error(`The project pledge ${pledgeId} already exists`);
     }
+
+    // create an instance of the project pledge
+    let pledge = new ProjectPledge();
+
+    pledge.pledgeNumber = pledgeNumber;
+    pledge.aidOrg = aidOrg;
+    pledge.name = name;
+    pledge.description = description;
+    pledge.fundsRequired = fundsRequired;
+    pledge.status = ppState.INITIALSTATE;
+
+    const buffer = Buffer.from(JSON.stringify(pledge));
+    await ctx.stub.putState(pledgeId, buffer);
+}
 ```
 
 The `@Transaction()` method decorator is used to indicate that the function actually transacts on the blockchain. Functions that are only reading from the ledger have the decorator `@Transaction(false)`. Inside the function is checked whether a project pledge with the given pledgeId already exists. If not, a new project pledge asset is constructed based on the values from the input parameters. Finally, the project pledge is converted to a buffer and submitted to the blockchain by calling `ctx.stub.putState`. Now, have a close look at the other functions in `src/my-projectpledge-contract.ts` so that you understand the different transactions involved. 
@@ -213,7 +207,11 @@ Next, choose your `smart-contract` folder as workspace folder to package (1).
 
 ![](./images/17-smart-contract-5.png)
 
-The result should be a `global-citizen@0.0.1` package under the Smart Contract Packages view. The final step in this section is to test whether the smart contract was successfully deployed. For this, click on the contract in the Fabric Gateways panel (expend local_fabric, then click mychannel -> global-citizen@0.0.1). Now, click the createProjectPledge (1) method and select 'Submit Transaction' (2).
+The result should be a `global-citizen@0.0.1` package under the Smart Contract Packages view. Next, make sure your local fabric is started by checking the Local Fabric Ops palette. If you see the message 'Local Fabric runtime is stopped...', click that message to start your local blockchain network. If the network is started, click instantiate (1) and hit <Enter> to accept 'mychannel' as channel to instantiate the contract on. Make sure the global-citizen@0.0.1 package is selected when asked which package to select. Hit <Enter> to accept all the defaults on all other questions asked.
+
+![](./images/39-smart-contract-9.png)
+
+The final step in this section is to test whether the smart contract was successfully deployed. For this, click on the contract in the Fabric Gateways panel (expend local_fabric, then click mychannel -> global-citizen@0.0.1). Now, click the createProjectPledge (1) method and select 'Submit Transaction' (2).
 
 ![](./images/18-smart-contract-6.png)
 
@@ -233,7 +231,7 @@ The business service communicates with the smart contract via the Hyperledger Fa
 
 ```
 cd ~/Development/blockchain
-cp ./hlfabric-lab-code/business-service/src/blockchainCLient.ts ./ibm-tnw2019-bc/src
+cp ./hlfabric-lab-code/business-service/src/blockchainClient.ts ./ibm-tnw2019-bc/src
 ```
 
 Next, move the `local_fabric` folder from the `hlfabric-lab-code` repo to the root folder of your business service. This folder contains the connection information to your local Hyperledger Fabric network, as well as some JavaScript files to enroll an admin user and a normal user.
@@ -614,5 +612,5 @@ The result should be similar to
 
 **CONGRATULATIONS!!** :smiley: :+1: 
 
-You successfully created a blockchain application that is capable of tracking donations according to the simplified business scenario mentioned at the top of this pattern. Next, play around with the dashboard and create some additional project pledges and query them. Have a look at the 'Blockchain' log in Visual Code to see that your dashboard activities -- via the business service and the smart contract -- actually transact with the blockchain network.
+You successfully created a blockchain application that is capable of tracking donations according to the simplified business scenario mentioned at the top of this pattern. Next, play around with the dashboard and create some additional project pledges and query them. Have a look at the 'Blockchain' log in Visual Code to confirm that your dashboard activities actually transact with the blockchain network.
 
