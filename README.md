@@ -138,11 +138,18 @@ Next, click the IBM Blockchain extension on the left-hand side (1), followed by 
 
 ![](./images/14-smart-contract-2.png)
 
-At this point, you have completed the tutorial and gained basic knowledge on smart contract development. The next step is to build the smart contract for the tracking donations use case. For this, add the `smart contract` sub-folder from the `hlfabric-lab-code` repository to your workspace in Visual Code. Your workspace should look similar to.
+At this point, you have completed the tutorial and gained basic knowledge on smart contract development. The next step is to build the smart contract for the tracking donations use case. For this, change directory to `smart-contract` folder in the `hlfabric-lab-code` repo and run `npm install`.
+
+```
+cd ~/Development/blockchain/hlfabric-lab-code/smart-contract
+npm install
+```
+
+Next, add the `smart contract` sub-folder to your workspace in Visual Code. Your workspace should look similar to:
 
 ![](./images/15-smart-contract-3.png)
 
-Now inspect the `smart contract` folder. The structure of the project is similar to the one from the tutorial. There are 2 assets and 5 transactions. The transactions are defined and implemented in the file `src/my-projectpledge-contract.ts`. Take a look at the `createProjectPledge` transaction.
+Now inspect this smart contract project. The structure of it is similar to the one from the tutorial. In this case, there are 2 assets and 5 transactions. The transactions are defined and implemented in the file `src/my-projectpledge-contract.ts`. Take a look at the `createProjectPledge` transaction.
 
 ```ts
 @Transaction()
