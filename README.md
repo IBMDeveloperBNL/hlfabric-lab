@@ -72,14 +72,14 @@ The business service is generated using the LoopBack framework. Two generators a
 
 ![](./images/11-build-service-1.png)
 
-The first step is to change directory to the `Development` folder and to clone the following git repository. 
+The first step is to change directory to the `Development/blockchain` folder and to clone the following git repository. 
 
 ```
-cd ~/Development
+cd ~/Development/blockchain
 git clone https://github.com/eciggaar/hlfabric-lab-code
 ```
 
-This will download the necessary code snippets (needed to complete this guide) to your VirtualBox environment. At the command prompt of the terminal session, make sure your current directory is the `Development` folder and type:
+This will download the necessary code snippets (needed to complete this guide) to your VirtualBox environment. At the command prompt of the terminal session, make sure your current directory is the `Development/blockchain` folder and type:
 
 ```
 lb4 ibm-tnw2019-bc
@@ -88,7 +88,7 @@ lb4 ibm-tnw2019-bc
 This invokes the application generator and generates a basic LoopBack application with the name `ibm-tnw2019-bc`. Hit <Enter> to accept the defaults. Once the basic application has been generated, change directory into the `ibm-tnw2019-bc` folder and invoke the OpeAPI generator to complete the set-up of our business service.
 
 ```
-cd ~/Development/ibm-tnw2019-bc
+cd ~/Development/blockchain/ibm-tnw2019-bc
 lb4 openapi --url ../hlfabric-lab-code/business-service/openapi.json --validate true
 ```
 
@@ -121,11 +121,11 @@ export class CreateProjectPledgeController {
    * 
    * 
 
-   * @param requestBody 
+   * @param _requestBody 
    * @returns ResponseMessage model instance
    */
   @operation('post', '/CreateProjectPledge')
-  async createProjectPledgeCreate(@requestBody() requestBody: CreateProjectPledge): Promise<ResponseMessage> {
+  async createProjectPledgeCreate(@requestBody() _requestBody: CreateProjectPledge): Promise<ResponseMessage> {
     throw new Error('Not implemented');
   }
 
@@ -140,7 +140,7 @@ Typically, business rules that need to be executed --- before a transaction can 
 
 ![](./images/13-smart-contract-1.png)
 
-Next, click the IBM Blockchain extension on the left-hand side (1), followed by the blockchain icon on the top right (2). This opens the IBM Blockchain Platform welcome page. On this page, click the 'Beginner tutorial' link (3) to start the tutorial.
+Next, click the IBM Blockchain extension on the left-hand side (1), followed by the blockchain icon on the top right (2). This opens the IBM Blockchain Platform welcome page. On this page, click the 'Beginner tutorial' link (3) to start the tutorial. It is highly recommended to complete this tutorial in order to understand the rest of this section.
 
 ![](./images/14-smart-contract-2.png)
 
@@ -307,11 +307,11 @@ with the following code
         let inputObj = {
           function: 'createProjectPledge',
           contract: networkObj.contract,
-          pledgeNumber: requestBody.pledgeNumber,
-          name: requestBody.name,
-          desc: requestBody.description,
-          fundsRequired: requestBody.fundsRequired,
-          aidOrg: requestBody.aidOrg
+          pledgeNumber: _requestBody.pledgeNumber,
+          name: _requestBody.name,
+          desc: _requestBody.description,
+          fundsRequired: _requestBody.fundsRequired,
+          aidOrg: _requestBody.aidOrg
         };
 
         await blockchainClient.createProjectPledge(inputObj);
@@ -393,7 +393,7 @@ and the errors should have disappeared. Make sure your changes to the controller
         let inputObj = {
           function: 'sendPledgeToGlobalCitizen',
           contract: networkObj.contract,
-          pledgeId: requestBody.pledgeId
+          pledgeId: _requestBody.pledgeId
         };
 
         await blockchainClient.sendPledgeToGlobalCitizen(inputObj);
@@ -402,7 +402,7 @@ and the errors should have disappeared. Make sure your changes to the controller
         throw new Error(networkObj.message);
       }
 
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'Sent project pledge ' + requestBody.pledgeId + ' to citizen org for review...' });
+      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'Sent project pledge ' + _requestBody.pledgeId + ' to citizen org for review...' });
       return responseMessage;
 
     } catch (error) {
@@ -421,7 +421,7 @@ and the errors should have disappeared. Make sure your changes to the controller
         let inputObj = {
           function: 'sendPledgeToGovOrg',
           contract: networkObj.contract,
-          pledgeId: requestBody.pledgeId
+          pledgeId: _requestBody.pledgeId
         };
 
         await blockchainClient.sendPledgeToGovOrg(inputObj);
@@ -430,7 +430,7 @@ and the errors should have disappeared. Make sure your changes to the controller
         throw new Error(networkObj.message);
       }
 
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'Sent project pledge ' + requestBody.pledgeId + ' to government org for review...' });
+      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'Sent project pledge ' + _requestBody.pledgeId + ' to government org for review...' });
       return responseMessage;
 
     } catch (error) {
@@ -449,7 +449,7 @@ and the errors should have disappeared. Make sure your changes to the controller
         let inputObj = {
           function: 'transferFunds',
           contract: networkObj.contract,
-          pledgeId: requestBody.pledgeId
+          pledgeId: _requestBody.pledgeId
         };
 
         await blockchainClient.transferFunds(inputObj);
@@ -458,7 +458,7 @@ and the errors should have disappeared. Make sure your changes to the controller
         throw new Error(networkObj.message);
       }
 
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'Total funds received incremented for project pledge ' + requestBody.pledgeId });
+      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'Total funds received incremented for project pledge ' + _requestBody.pledgeId });
       return responseMessage;
 
     } catch (error) {
@@ -477,10 +477,10 @@ and the errors should have disappeared. Make sure your changes to the controller
         let inputObj = {
           function: 'updatePledge',
           contract: networkObj.contract,
-          pledgeId: requestBody.pledgeId,
-          fundingType: requestBody.fundingType,
-          approvedFunding: requestBody.approvedFunding,
-          fundsPerInstallment: requestBody.fundsPerInstallment
+          pledgeId: _requestBody.pledgeId,
+          fundingType: _requestBody.fundingType,
+          approvedFunding: _requestBody.approvedFunding,
+          fundsPerInstallment: _requestBody.fundsPerInstallment
         };
 
         await blockchainClient.updatePledge(inputObj);
@@ -489,7 +489,7 @@ and the errors should have disappeared. Make sure your changes to the controller
         throw new Error(networkObj.message);
       }
 
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'Updated project pledge ' + requestBody.pledgeId });
+      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'Updated project pledge ' + _requestBody.pledgeId });
       return responseMessage;
 
     } catch (error) {
@@ -529,34 +529,88 @@ It is time to test the connected business service. For this, start the applicati
 
 The first test is to create a new project pledge using the parameters as shown in the screenshot below. Remember, to get to the form where you can provide the project pledge details, first click the `CreateProjectPledgeController`. Then, click the POST request `CreateProjectPledge` and finally the 'Try it out' button on the right. The POST request should return with a HTTP 200 OK response message.
 
-![](./images/21-connecting-parts-2.png)
+![](./images/22-connecting-parts-2.png)
 
 Next, send this project pledge to the citizen organization for review by invoking the `SendPledgeToGlobalCitizenController` function. If you used the parameters from the screenshot above, you should use 'aid2:002' as plegeId.
 
-![](./images/21-connecting-parts-3.png)
+![](./images/23-connecting-parts-3.png)
 
 Next, send the project pledge to the government organization. Use the same pledgeId as above.
 
-![](./images/21-connecting-parts-4.png)
+![](./images/24-connecting-parts-4.png)
 
 The government organization can update the pledge with the total fund approved, funding type and the fund installment per transfer. To update the project pledge with these details, invoke the controller with the following parameters...
 
-![](./images/21-connecting-parts-5.png)
+![](./images/25-connecting-parts-5.png)
 
 Finally, you can start transferring funds by invoking the `TransferFundsController` controller with `aid2:002` as pledgeId.
 
-![](./images/21-connecting-parts-6.png)
+![](./images/26-connecting-parts-6.png)
 
 Now query the project pledge by invoking the `ProjectPledgeController` controller. Use the same pledgeId as above. 
 
-![](./images/21-connecting-parts-7.png)
+![](./images/27-connecting-parts-7.png)
 
 You should see an output similar to
 
-![](./images/21-connecting-parts-8.png)
+![](./images/28-connecting-parts-8.png)
 
 Note the funds object that is part of the project pledge now. If you invoke transferFunds again, followed by the above project pledge query, you should see an increase of the `totalFundsReceived` attribute.
 
 ### Connecting the business service to the frontend
 
+As the business service exposes the transactions as RESTful endpoints, it is relatively easy to connect the frontend to it. The most important part is to open up the local running business sevice to the outside world. This is done via a tool called `ngrok`. To start this, open a separate tab in the terminal that you opened in your Virtual Box environment and type `ngrok http 3000`. This will create a 
+
+![](./images/29-connecting-parts-9.png)
+
+The result should be look like 
+
+![](./images/30-connecting-parts-10.png)
+
+At this point your running business service should also be accessible via (1). Try this in your browser to verify this is true for you as well.
+
+To show that the frontend can connect to the business service, open a new tab in your browser and look up the app URL of the Node-RED application that you deployed in Part 1. Paste this URL. On the Node-RED welcome page that is shown, click the 'Go to your Node-RED editor' button to open your flow editor. Logon with your Node-RED userid / password when needed (also created in Part 1). On the empty canvas, we will create a very simple flow that, on request, reads a project pledge with a given pledgeId and then, sends the output to the debug node. 
+
+From the node pallet drag the inject node (1) and the debug node (2) to the canvas. 
+
+![](./images/31-connecting-parts-11.png)
+
+Now scroll down in the node pallet till you see the 'function' section and drag the HTTP request node (1) onto the canvas as well. Connect the three nodes together as shown at (2) in the screenshot below. 
+
+![](./images/32-connecting-parts-12.png)
+
+Next, double-click the 'http request' node and fill in the URL (1) as shown below. Replace the secure base URL with your secure ngrok URL and click 'Done' (2). Finally, click 'Deploy' (3) to deploy the flow. 
+
+![](./images/33-connecting-parts-13.png)
+
+To test the flow click the small box (1) left from the timestamp inspect node. Click the debug tab on the right to see the result. This should be a string representing the project pledge with pledgeId `aid2:002`.
+
+![](./images/34-connecting-parts-14.png)
+
+Congratulations, you connected all three parts of the demo application!! The frontend (Node-RED) invokes via a REST call the business service. The business service uses the Hyperledger Fabric SDK to invoke a transaction of the smart contract and transact with the blockchain network.
+
+### Build a basic dashboard to create project pledges
+Okay, agreed, this still is a very minimalistic UI...Therefore, let's extend it a bit and create a web UI that can be used to create new project pledges. For this, copy the content of the `create-project-pledge.json` in the `frontend` folder of the `ibm-tnw2019-bc` repo to your clipboard. Next, click the menu on the top-right and select Import (2) and then Clipboard (3). 
+
+![](./images/35-connecting-parts-15.png)
+
+Now, use CTRL-V to paste the clipboard and click 'Import' (1) to complete the import. 
+
+![](./images/36-connecting-parts-16.png)
+
+The result should look like this.
+
+![](./images/37-connecting-parts-17.png)
+
+Finally, click 'Deploy' to deploy the flow. You can now test the dashboard by going to the same base URL as your Node-RED application only suffixed with `/ui` instead of `/red`. So the URL for the dashboard should look like:
+
+```
+http://<node-red-base-url>/ui
+```
+
+The result should be similar to 
+
+![](./images/38-connecting-parts-18.png)
+
+**CONGRATULATIONS!!** :smiley: :+1 You successfully created a blockchain application that is capable of tracking donations according to the simplified business scenario mentioned at the top of this pattern. Next, play around with the dashboard and create some additional project pledges and query them. Have a look at the 'Blockchain' log in Visual Code to see that your dashboard activities -- via the business service and the smart contract -- actually transact with the blockchain network.
 
