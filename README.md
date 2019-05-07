@@ -40,11 +40,11 @@ Give the service a unique name (1) and select a nearby region to deploy to (e.g.
 
 The deployment takes a couple of minutes to complete, so you might want to move on to [Part 2](#2-build-the-business-service) and start the creation of your business service and return later to complete the setup of your frontend.
 
-Once the deployment is successfully completed, visit the app URL by clicking (1) on the image below.
+Once the deployment is successfully completed, visit the app URL by clicking on the 'Visit App URL' (1) on the image below.
 
 ![](./images/05-nodered-3.png)
 
-Next, complete the Node-RED initial set-up wizard. Click Next on the first screen and choose a userid/password on the second one to secure your Node-RED environment. Click Next (2) and Next again to go to the final overview page of the wizard. Click Finish to complete it. 
+Next, complete the Node-RED initial set-up wizard. Click Next on the first screen and choose a userid/password on the second one to secure your Node-RED environment. Click Next (1) and Next again to go to the final overview page of the wizard. Click Finish to complete it. 
 
 ![](./images/06-nodered-4.png)
 
@@ -56,11 +56,11 @@ Login with your Node-RED credentials (the userid/password you specified in the w
 
 ![](./images/08-nodered-6.png)
 
-Next, click Install (1) and type 'dashboard' in the search bar. Click Install (3) to start the installation of the Node-RED dashboard nodes. 
+Next, click Install (1) and type 'dashboard' in the search bar (2). Click Install (3) to start the installation of the Node-RED dashboard nodes. 
 
 ![](./images/09-nodered-7.png)
 
-Once the installation successfully completes, click 'Close' to close the palette. The dashboard nodes are available to you as a separate section on the left-hand side. You might need to scroll down to see them.
+Once the installation successfully completes, click 'Close' (4) to close the palette. The dashboard nodes are available to you as a separate section on the left-hand side. You might need to scroll down to see them.
 
 ![](./images/10-nodered-8.png)
 
