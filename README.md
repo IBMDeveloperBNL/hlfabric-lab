@@ -288,13 +288,13 @@ Once connected to the network, every transaction has its own function in the cli
     }
 ```
 
-Now all transactions can be invoked via the client, it is time to implement the controller logic. For this, expand the `src/controllers` folder of the `ibm-tnw2019-bc` project and double-click the first controller `create-project-pledge.controller.ts` in the list. It should be opened in Visual Code. Now replace line 23
+Now all transactions can be invoked via the client, it is time to implement the controller logic. For this, add the `ibm-tnw2019-bc` folder to your workspace in Visual Code and expand the `src/controllers` folder. Double-click the first controller `create-project-pledge.controller.ts` in the list. Now replace line 23
 
 ```ts
 throw new Error('Not implemented');
 ```
 
-with the following code
+with the following code:
 
 ```ts
      try {
