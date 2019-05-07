@@ -519,7 +519,7 @@ When our blockchain network was started for the first time (in part 3 of this pa
 To enroll the admin user, type the following in the `local_fabric` folder of your business service.
 
 ```
-cd ~/Development/blockchain/ibm-tnw-2019-bc/local_fabric
+cd ~/Development/blockchain/ibm-tnw2019-bc/local_fabric
 node enrollAdmin.js
 ```
 
