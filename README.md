@@ -523,7 +523,14 @@ cd ~/Development/blockchain/ibm-tnw2019-bc/local_fabric
 node enrollAdmin.js
 ```
 
-It is time to test the connected business service. For this, start the application by running `npm start` in the root folder of your project (typically `ibm-tnw2019`). The application should successfully start and can be accessed on [http://localhost:3000/explorer](http://localhost:3000/explorer). Now, test all transactions to make sure the controllers are properly implemented and can access the smart contract.
+It is time to test the connected business service. For this, start the application by running `npm start` in the root folder of your project (typically `ibm-tnw2019`). 
+
+```
+cd ~/Development/blockchain/ibm-tnw2019-bc
+npm start
+```
+
+The application should successfully start and can be accessed on [http://localhost:3000/explorer](http://localhost:3000/explorer). Now, test all transactions to make sure the controllers are properly implemented and can access the smart contract.
 
 The first test is to create a new project pledge using the parameters as shown in the screenshot below. Remember, to get to the form where you can provide the project pledge details, first click the `CreateProjectPledgeController`. Then, click the POST request `CreateProjectPledge` and finally the 'Try it out' button on the right. The POST request should return with a HTTP 200 OK response message.
 
