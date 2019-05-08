@@ -68,7 +68,7 @@ For now, this completes the first step. You just created a Node-RED application 
 
 ## 2. Build the Business Service
 
-The business service is generated using the LoopBack framework. Two generators are used, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service and that are defined in the included `openapi.json` file. For this part of the pattern you need to start the VirtualBox image. Once the image is completely up and running, open a terminal session. 
+The business service is generated using the LoopBack framework. Two generators are used, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service and that are defined in the included `openapi.json` file. For this part of the pattern you need to start the VirtualBox image. Once the image is completely up and running, open a terminal session (1). 
 
 ![](./images/11-build-service-1.png)
 
@@ -102,11 +102,11 @@ npm start
 
 Now open a browser session and browse to [http://localhost:3000/explorer](http://localhost:3000/exlorer). This gives an overview of all available REST endpoints of our business service. 
 
-Try to invoke one of the endpoints (e.g. createProjectPledge) by clicking on the service (1). Next, click 'Try it' (2) and provide some sample values (3). Finally, click 'Execute' (4) to submit the request and test the service. 
+Try to invoke one of the endpoints (e.g. createProjectPledge) by clicking on the service (1). Next, click 'Try it out' (2) and provide some sample values (3). Finally, click 'Execute' (4) to submit the request and test the service. 
 
 ![](./images/12-build-service-2.png)
 
-The response will be a 500 internal server error. The reason for this is, that this is the current implementation of the service. It throws exactly this error message.
+The response will be a '500 Internal Server Error'. The reason for this is, that this is the current implementation of the service. It throws exactly this error message.
 
 ```ts
 export class CreateProjectPledgeController {
@@ -130,7 +130,7 @@ Typically, business rules that need to be executed --- before a transaction can 
 
 For this, we will follow the beginner tutorial that is part of the IBM Blockchain extension in Visual Code. After you completed the tutorial you should have a better understanding of how to develop and debug smart contracts as well as of how to deploy them to your network. The IBM blockchain extension itself is built to provide developers an integrated workflow for building blockchain applictions. 
 
-To get started with the tutorial, click on the Visual Code launcher in your VirtualBox image.
+To get started with the tutorial, click on the Visual Code launcher (1) in your VirtualBox image.
 
 ![](./images/13-smart-contract-1.png)
 
@@ -214,15 +214,15 @@ Next, choose your `smart-contract` folder as workspace folder to package (1).
 
 ![](./images/17-smart-contract-5.png)
 
-The result should be a `global-citizen@0.0.1` package under the Smart Contract Packages view. Next, make sure your local fabric is started by checking the Local Fabric Ops palette. If you see the message 'Local Fabric runtime is stopped...', click that message to start your local blockchain network. If the network is started, click instantiate (1) and hit <Enter> to accept 'mychannel' as channel to instantiate the contract on. Make sure the global-citizen@0.0.1 package is selected when asked which package to select. Hit <Enter> to accept all the defaults on all other questions asked.
+The result should be a `global-citizen@0.0.1` package under the 'Smart Contract Packages' palette. Next, make sure your local fabric is started by checking the 'Local Fabric Ops' palette. If you see the message 'Local Fabric runtime is stopped...', click that message to start your local blockchain network. If the network is started, click instantiate (1) and hit <Enter> to accept 'mychannel' (2) as channel to instantiate the contract on. Make sure the global-citizen@0.0.1 package is selected when asked which package to select. Hit <Enter> to accept the defaults on all other questions asked.
 
 ![](./images/39-smart-contract-9.png)
 
-The final step in this section is to test whether the smart contract was successfully deployed. For this, click on the contract in the Fabric Gateways panel (expend local_fabric, then click mychannel -> global-citizen@0.0.1). Now, click the createProjectPledge (1) method and select 'Submit Transaction' (2).
+The final step in this section is to test whether the smart contract was successfully deployed. For this, click on the contract in the Fabric Gateways panel (expand local_fabric, then click mychannel -> global-citizen@0.0.1). Now, click the createProjectPledge (1) method and select 'Submit Transaction' (2).
 
 ![](./images/18-smart-contract-6.png)
 
-Pass the following arguments to the function and hit Enter.
+Pass the argument string `aid1,001,test,test desc,100000` to the function and hit Enter.
 
 ![](./images/19-smart-contract-7.png)
 
@@ -340,7 +340,7 @@ You'll probably notice that the blockchainClient variable cannot be resolved. Th
 let blockchainClient = new BlockChainModule.BlockchainClient();
 ```
 
-The code should now look like
+The code should now look like:
 
 ```ts
 /* tslint:disable:no-any */
@@ -509,7 +509,7 @@ cd ~/Development/blockchain/ibm-tnw2019-bc
 npm start
 ```
 
-This will fail with the following error message
+This will fail with the following error message:
 
 ![](./images/21-connecting-parts-1.png)
 
@@ -519,9 +519,9 @@ The `fabric-network` module is not added as a dependency yet. To add this module
 "fabric-network": "^1.4.0"
 ```
 
-Now, run `npm install` in the same directory as before -- the root folder of your business service. 
+Now, run `npm install` in the same directory (`~/Development/blockchain/ibm-tnw2019-bc`) as before.
 
-When our blockchain network was started for the first time (in part 3 of this pattern), an admin user was registered with our Certificate Authority. Now we need to send an enroll call to the CA server and retrieve the enrollment certificate (eCert) for this user. We won’t delve into enrollment details here, but stop by saying that the SDK and by extension our applications need this cert in order to form a user object for the admin. This user object (identity) is needed to connect to the Hyperledger Fabric gateway (line 30 in the `blockchainClient.ts` file). 
+When the blockchain network was started for the first time (in Part 3 of this pattern), an admin user was registered with our Certificate Authority. Now we need to send an enroll call to the CA server and retrieve the enrollment certificate (eCert) for this user. We won’t delve into enrollment details here, but suffice by saying that the SDK --- and by extension our applications --- need this cert in order to form a user object for the admin. This user object (identity) is needed to connect to the Hyperledger Fabric gateway (line 30 in the `blockchainClient.ts` file). 
 
 To enroll the admin user, type the following in the `local_fabric` folder of your business service.
 
@@ -530,16 +530,16 @@ cd ~/Development/blockchain/ibm-tnw2019-bc/local_fabric
 node enrollAdmin.js
 ```
 
-It is time to test the connected business service. For this, start the application by running `npm start` in the root folder of your project (typically `ibm-tnw2019`). 
+It is time to test the connected business service. For this, start the application by running `npm start` in the root folder of your project.
 
 ```
 cd ~/Development/blockchain/ibm-tnw2019-bc
 npm start
 ```
 
-The application should successfully start and can be accessed on [http://localhost:3000/explorer](http://localhost:3000/explorer). Now, test all transactions to make sure the controllers are properly implemented and can access the smart contract.
+The business service can be accessed on [http://localhost:3000/explorer](http://localhost:3000/explorer). Now, test all transactions to make sure the controllers are properly implemented and can access the smart contract.
 
-The first test is to create a new project pledge using the parameters as shown in the screenshot below. Remember, to get to the form where you can provide the project pledge details, first click the `CreateProjectPledgeController`. Then, click the POST request `CreateProjectPledge` and finally the 'Try it out' button on the right. The POST request should return with a HTTP 200 OK response message.
+We start with the CreateProjectPledgeController. We create a new project pledge using the parameters as shown in the screenshot below. Remember, to get to the form where you can provide the project pledge details, first click the `CreateProjectPledgeController`. Then, click the POST request `CreateProjectPledge` and finally the 'Try it out' button on the right. The POST request should return with a HTTP 200 OK response message.
 
 ![](./images/22-connecting-parts-2.png)
 
@@ -563,7 +563,7 @@ Now query the project pledge by invoking the `ProjectPledgeController` controlle
 
 ![](./images/27-connecting-parts-7.png)
 
-You should see an output similar to
+You should see an output similar to:
 
 ![](./images/28-connecting-parts-8.png)
 
@@ -571,11 +571,11 @@ Note the funds object that is part of the project pledge now. If you invoke tran
 
 ### Connecting the business service to the frontend
 
-As the business service exposes the transactions as RESTful endpoints, it is relatively easy to connect the frontend to it. The most important part is to open up the local running business sevice to the outside world. This is done via a tool called `ngrok`. To start this, open a separate tab in the terminal that you opened in your Virtual Box environment and type `ngrok http 3000`. This will create a 
+As the business service exposes the transactions as RESTful endpoints, it is relatively easy to connect the frontend to it. The most important part is to open up the local running business sevice to the outside world. This is done via a tool called `ngrok`. To start this, open a separate tab in the terminal that you opened in your Virtual Box environment and type `ngrok http 3000`. This will create a secure tunnel that allows communication (HTTP) from the outside world towards your locahost (the VirtualBox image) listening on port 3000.
 
 ![](./images/29-connecting-parts-9.png)
 
-The result should be look like 
+The result should be look like:
 
 ![](./images/30-connecting-parts-10.png)
 
@@ -602,7 +602,7 @@ To test the flow click the small box (1) left from the timestamp inspect node. C
 Congratulations, you connected all three parts of the demo application!! The frontend (Node-RED) invokes via a REST call the business service. The business service uses the Hyperledger Fabric SDK to invoke a transaction of the smart contract and transact with the blockchain network.
 
 ### Build a basic dashboard to create project pledges
-Okay, agreed, this still is a very minimalistic UI...Therefore, let's extend it a bit and create a web UI that can be used to create new project pledges. For this, copy the content of the `create-project-pledge.json` in the `frontend` folder of the `ibm-tnw2019-bc` repo to your clipboard. Next, click the menu on the top-right and select Import (2) and then Clipboard (3). 
+Okay, agreed, this still is a very minimalistic UI...Therefore, let's extend it a bit and create a web UI that can be used to create new project pledges. For this, copy the content of the `create-project-pledge.json` in the `frontend` folder of the `hlfabric-lab-code` repo to your clipboard. Next, click the menu (1) on the top-right. Select Import (2), followed by Clipboard (3). 
 
 ![](./images/35-connecting-parts-15.png)
 
@@ -610,17 +610,17 @@ Now, use CTRL-V to paste the clipboard and click 'Import' (1) to complete the im
 
 ![](./images/36-connecting-parts-16.png)
 
-The result should look like this.
+The result should be similar to:
 
 ![](./images/37-connecting-parts-17.png)
 
-Finally, click 'Deploy' to deploy the flow. You can now test the dashboard by going to the same base URL as your Node-RED application only suffixed with `/ui` instead of `/red`. So the URL for the dashboard should look like:
+Finally, click 'Deploy' (1) to deploy the flow. You can now test the dashboard by going to the same base URL as your Node-RED application only suffixed with `/ui` instead of `/red`. So the URL for the dashboard should look like:
 
 ```
 http://<node-red-base-url>/ui
 ```
 
-The result should be similar to 
+The result should be similar to: 
 
 ![](./images/38-connecting-parts-18.png)
 
