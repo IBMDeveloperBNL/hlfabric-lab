@@ -82,19 +82,19 @@ git clone https://github.com/eciggaar/hlfabric-lab-code
 This will download the necessary code snippets (needed to complete this guide) to your VirtualBox environment. At the command prompt of the terminal session, make sure your current directory is the `Development/blockchain` folder and type:
 
 ```
-lb4 ibm-tnw2019-bc
+lb4 my-bc-app
 ```
 
-This invokes the application generator and generates a basic LoopBack application with the name `ibm-tnw2019-bc`. Hit <Enter> to accept the defaults. Once the basic application has been generated, change directory into the `ibm-tnw-2019-bc` folder and invoke the OpeAPI generator to complete the set-up of our business service.
+This invokes the application generator and generates a basic LoopBack application with the name `my-bc-app`. Hit <Enter> to accept the defaults. Once the basic application has been generated, change directory into the `my-bc-app` folder and invoke the OpeAPI generator to complete the set-up of our business service.
 
 ```
-cd ~/Development/blockchain/ibm-tnw-2019-bc
+cd ~/Development/blockchain/my-bc-app
 lb4 openapi --url ../hlfabric-lab-code/business-service/openapi.json --validate true
 ```
 
 Again, accept all defaults. The second command generates the models and controllers needed for the business service. They are defined in the `openapi.json` file. Browse to the `hlfabric-lab-code` folder to manually inspect the JSON file. You'll see definitions for the project pledge asset as well as transactions like `createProjectPledge` and `transferFunds`.
 
-Finally, the skeleton for the business service can be tested by typing `npm start` (current directory should be `ibm-tnw-2019-bc`).
+Finally, the skeleton for the business service can be tested by typing `npm start` (current directory should be `my-bc-app`).
 
 ```
 npm start
@@ -145,7 +145,7 @@ cd ~/Development/blockchain/hlfabric-lab-code/smart-contract
 npm install
 ```
 
-Next, add the `smart contract` sub-folder to your workspace in Visual Code. Your workspace should look similar to:
+Next, add the `smart-contract` sub-folder to your workspace in Visual Code. Your workspace should look similar to:
 
 ![](./images/15-smart-contract-3.png)
 
@@ -238,14 +238,14 @@ The business service communicates with the smart contract via the Hyperledger Fa
 
 ```
 cd ~/Development/blockchain
-cp ./hlfabric-lab-code/business-service/src/blockchainClient.ts ./ibm-tnw-2019-bc/src
+cp ./hlfabric-lab-code/business-service/src/blockchainClient.ts ./my-bc-app/src
 ```
 
 Next, move the `local_fabric` folder from the `hlfabric-lab-code` repo to the root folder of your business service. This folder contains the connection information to your local Hyperledger Fabric network, as well as some JavaScript files to enroll an admin user and a normal user.
 
 ```
 cd ~/Development/blockchain
-mv ./hlfabric-lab-code/business-service/local_fabric ./ibm-tnw-2019-bc
+mv ./hlfabric-lab-code/business-service/local_fabric ./my-bc-app
 ```
 
 Now open the blockchain client in Visual Code. An important function in this class is the function `connectToNetwork()`.
@@ -295,7 +295,7 @@ Once connected to the network, every transaction has its own function in the cli
     }
 ```
 
-Now all transactions can be invoked via the client, it is time to implement the controller logic. For this, add the `ibm-tnw-2019-bc` folder to your workspace in Visual Code and expand the `src/controllers` folder. Double-click the first controller `create-project-pledge.controller.ts` in the list. Now replace line 23
+Now all transactions can be invoked via the client, it is time to implement the controller logic. For this, add the `my-bc-app` folder to your workspace in Visual Code and expand the `src/controllers` folder. Double-click the first controller `create-project-pledge.controller.ts` in the list. Now replace line 23
 
 ```ts
 throw new Error('Not implemented');
@@ -505,7 +505,7 @@ and the errors should have disappeared. Make sure your changes to the controller
 Now, try to run your business service by running `npm start` from the root directory of your service.
 
 ```
-cd ~/Development/blockchain/ibm-tnw-2019-bc
+cd ~/Development/blockchain/my-bc-app
 npm start
 ```
 
@@ -516,24 +516,24 @@ This will fail with the following error message:
 The `fabric-network` module is not added as a dependency yet. To add this module, open the `package.json` file in Visual Code and add the following line to the `devDependencies` section.
 
 ```
-"fabric-network": "^1.4.0"
+"fabric-network": "^1.4.1"
 ```
 
-Now, run `npm install` in the same directory (`~/Development/blockchain/ibm-tnw-2019-bc`) as before.
+Now, run `npm install` in the same directory (`~/Development/blockchain/my-bc-app`) as before.
 
 When the blockchain network was started for the first time (in Part 3 of this pattern), an admin user was registered with our Certificate Authority. Now we need to send an enroll call to the CA server and retrieve the enrollment certificate (eCert) for this user. We won’t delve into enrollment details here, but suffice by saying that the SDK --- and by extension our applications --- need this cert in order to form a user object for the admin. This user object (identity) is needed to connect to the Hyperledger Fabric gateway (line 30 in the `blockchainClient.ts` file). 
 
 To enroll the admin user, type the following in the `local_fabric` folder of your business service.
 
 ```
-cd ~/Development/blockchain/ibm-tnw-2019-bc/local_fabric
+cd ~/Development/blockchain/my-bc-app/local_fabric
 node enrollAdmin.js
 ```
 
 It is time to test the connected business service. For this, start the application by running `npm start` in the root folder of your project.
 
 ```
-cd ~/Development/blockchain/ibm-tnw-2019-bc
+cd ~/Development/blockchain/my-bc-app
 npm start
 ```
 
