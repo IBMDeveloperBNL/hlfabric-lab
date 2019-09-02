@@ -138,7 +138,7 @@ Next, click the IBM Blockchain extension on the left-hand side (1), followed by 
 
 ![](./images/14-smart-contract-2.png)
 
-Next click the Local smart contract development tutorial. This one takes you through the basics of smart contract development for Fabric. It is highly recommended to complete this tutorial in order to understand the rest of this section.
+Next click the 'Local smart contract development' tutorial. This one takes you through the basics of smart contract development for Fabric. It is highly recommended to complete this tutorial in order to understand the rest of this section.
 
 ![](./images/40-smart-contract-10.png)
 
