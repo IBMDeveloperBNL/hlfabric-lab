@@ -6,7 +6,7 @@ Audience level: Intermediate Developers
 
 ## Prerequisites
 
-1. Free [IBM Cloud account](https://ibm.biz/Bd2t6h)
+1. Free [IBM Cloud account](https://ibm.biz/Bdz2vG)
 2. The VirtualBox image containing Hyperledger Fabric and all other pre-reqs to complete this pattern
 3. VirtualBox 6.x
 
