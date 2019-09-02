@@ -13,7 +13,7 @@ Audience level: Intermediate Developers
 Once VirtualBox 6.x is installed on your environment, double-click on the `Hyperledger Fabric.ova` file and accept the defaults to import it into VirtualBox.
 
 ## Overview
-The image below gives a high level overview of the scenario described above and will form the basis of our demo application. This idea is taken from the 'Tracking Donations with blockchain' code pattern and modified so that it can also be deployed to the IBM Blockchain Platform V2.0 service
+The image below gives a high level overview of the scenario described above and will form the basis of our demo application. The original idea comes from the 'Tracking Donations with blockchain' code pattern and is modified so that it can also be deployed to the IBM Blockchain Platform V2.0 service.
 
 ![](./images/01-overview-1.png)  
 
@@ -134,9 +134,13 @@ To get started with the tutorial, click on the Visual Code launcher (1) in your 
 
 ![](./images/13-smart-contract-1.png)
 
-Next, click the IBM Blockchain extension on the left-hand side (1), followed by the blockchain icon on the top right (2). This opens the IBM Blockchain Platform welcome page. On this page, click the 'Beginner tutorial' link (3) to start the tutorial. It is highly recommended to complete this tutorial in order to understand the rest of this section.
+Next, click the IBM Blockchain extension on the left-hand side (1), followed by the blockchain icon on the top right (2). This opens the IBM Blockchain Platform welcome page. On this page, click the 'Follow tutorials' link (3) to open the tutorials gallery. 
 
 ![](./images/14-smart-contract-2.png)
+
+Next click the Local smart contract development tutorial. This one takes you through the basics of smart contract development for Fabric. It is highly recommended to complete this tutorial in order to understand the rest of this section.
+
+![](./images/40-smart-contract-10.png)
 
 At this point, you have completed the tutorial and gained basic knowledge on smart contract development. The next step is to build the smart contract for the tracking donations use case. For this, change directory to `smart-contract` folder in the `hlfabric-lab-code` repo and run `npm install`.
 
@@ -206,7 +210,7 @@ export class Funding {
 
 ```
 
-The last part of this section is to deploy the smart contract to our blockchain network. For this, open the IBM Blockchain extension in your Visual Code editor by clicking the blockchain icon on the left-hand side (1). Next, in the Smart Contract Packages panel, select the Options (2) and click 'Package a Smart Contract' (3).
+The last part of this section is to deploy the smart contract to our blockchain network. For this, open the IBM Blockchain extension in your Visual Code editor by clicking the blockchain icon on the left-hand side (1). Next, in the Smart Contract Packages panel, select the Options (2) and click 'Package Open Project' (3).
 
 ![](./images/16-smart-contract-4.png)
 
@@ -222,11 +226,11 @@ The final step in this section is to test whether the smart contract was success
 
 ![](./images/18-smart-contract-6.png)
 
-Pass the argument string `aid1,001,test,test desc,100000` to the function and hit Enter.
+Pass the argument string `["aid1","001","test","test desc","100000"]` to the function and hit Enter.
 
 ![](./images/19-smart-contract-7.png)
 
-The transaction should complete successfully. Finally, test whether you can read the project pledge by invoking the `readProjectPledge` function. Pass `aid1:001` as pledgeId and check if the response matches the screenshot below.
+The transaction should complete successfully. Finally, test whether you can read the project pledge by invoking the `readProjectPledge` function. Pass `["aid1:001"]` as pledgeId and check if the response matches the screenshot below.
 
 ![](./images/20-smart-contract-8.png)
 
