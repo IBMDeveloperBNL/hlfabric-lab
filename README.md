@@ -520,7 +520,7 @@ This will fail with the following error message:
 The `fabric-network` module is not added as a dependency yet. To add this module, open the `package.json` file in Visual Code and add the following line to the `devDependencies` section.
 
 ```
-"fabric-network": "^1.4.1"
+"fabric-network": "^1.4.2"
 ```
 
 Now, run `npm install` in the same directory (`~/Development/blockchain/my-bc-app`) as before.
