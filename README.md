@@ -257,8 +257,6 @@ Now open the blockchain client in Visual Code. An important function in this cla
 ```ts
     async connectToNetwork() {
 
-      const gateway = new Gateway();
-
       try {
         await gateway.connect(ccp, { wallet, identity: appAdmin, discovery: gatewayDiscovery });
 
@@ -335,6 +333,8 @@ with the following code:
     } catch (error) {
       let responseMessage: ResponseMessage = new ResponseMessage({ message: error, statusCode: '400' });
       return responseMessage;
+    } finally {
+      blockchainClient.disconnectFromNetwork();
     }
 ```
 
@@ -389,6 +389,8 @@ and the errors should have disappeared. Make sure your changes to the controller
 
     } catch (error) {
       return error;
+    } finally {
+      blockchainClient.disconnectFromNetwork();
     }
 ```
 
@@ -417,6 +419,8 @@ and the errors should have disappeared. Make sure your changes to the controller
     } catch (error) {
       let responseMessage: ResponseMessage = new ResponseMessage({ message: error, statusCode: '400' });
       return responseMessage;
+    } finally {
+      blockchainClient.disconnectFromNetwork();
     }
 ```
 
@@ -445,6 +449,8 @@ and the errors should have disappeared. Make sure your changes to the controller
     } catch (error) {
       let responseMessage: ResponseMessage = new ResponseMessage({ message: error, statusCode: '400' });
       return responseMessage;
+    } finally {
+      blockchainClient.disconnectFromNetwork();
     }
 ```
 
@@ -473,6 +479,8 @@ and the errors should have disappeared. Make sure your changes to the controller
     } catch (error) {
       let responseMessage: ResponseMessage = new ResponseMessage({ message: error, statusCode: '400' });
       return responseMessage;
+    } finally {
+      blockchainClient.disconnectFromNetwork();
     }
 ```
 
@@ -504,6 +512,8 @@ and the errors should have disappeared. Make sure your changes to the controller
     } catch (error) {
       let responseMessage: ResponseMessage = new ResponseMessage({ message: error.message, statusCode: '400' });
       return responseMessage;
+    } finally {
+      blockchainClient.disconnectFromNetwork();
     }
 ```
 Now, try to run your business service by running `npm start` from the root directory of your service.
