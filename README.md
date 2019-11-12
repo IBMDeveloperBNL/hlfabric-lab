@@ -61,7 +61,7 @@ As you can see in the image, building this demo application consists of three ma
 3. [Build the Smart Contract](#3-build-the-smart-contract)
 4. [Connecting all parts](#4-connecting-all-parts)
 
-## 1. Build a front-end in Node-RED
+## 1. Build a frontend in Node-RED
 Logon to IBM Cloud using the free account you just created. Next, click the 'Catalog' on the top bar (1) and then search for Node-RED (2). Finally, click on the starter kit Node-RED Starter.
 
 ![](./images/03-nodered-1.png)  
