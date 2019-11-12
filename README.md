@@ -658,7 +658,7 @@ Okay, agreed, this still is a very minimalistic UI...Therefore, let's extend it 
 
 ![](./images/35-connecting-parts-15.png)
 
-Next, click 'select a file to import' (1) and browse to the `frontend` folder of the `hlfabric-lab-code` repo. Select the file `create-project-pledge.json` and make sure 'new flow' (2) is selected. This will import the flow as a new flow in a separate tab. Finally, click Import (3) to complete the import.
+Next, click 'select a file to import' (1) and browse to the `frontend` folder of the `hlfabric-lab-code` repo. Select the file `create-project-pledge.json` and click 'Open'. Next, make sure 'new flow' (2) is selected. This will import the flow as a new flow in a separate tab. Finally, click Import (3) to complete the import.
 
 ![](./images/36-connecting-parts-16.png)
 
