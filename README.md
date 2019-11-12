@@ -35,7 +35,7 @@ or when you prefer not to use a virtual image and wanna set up everything yourse
 <details>
   <summary>Install all prereqs on your own machine</summary>
 
-  1. Follow the steps at the **Requirements** section of the IBM Blockchain extension for Visual Code at:
+  1. Follow the steps at the 'Requirements' section of the IBM Blockchain extension for Visual Code at:
 
   <li>https://github.com/IBM-Blockchain/blockchain-vscode-extension</li>
 
@@ -62,7 +62,7 @@ As you can see in the image, building this demo application consists of three ma
 4. [Connecting all parts](#4-connecting-all-parts)
 
 ## 1. Build a frontend in Node-RED
-Logon to IBM Cloud using the free account you just created. Next, click the 'Catalog' on the top bar (1) and then search for Node-RED (2). Finally, click on the starter kit Node-RED Starter.
+Logon to IBM Cloud using the free account you just created. Next, click the 'Catalog' on the top bar (1) and then search for Node-RED (2). Finally, click on the starter kit 'Node-RED Starter'.
 
 ![](./images/03-nodered-1.png)  
 
