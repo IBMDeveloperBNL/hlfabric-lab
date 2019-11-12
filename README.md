@@ -654,11 +654,11 @@ To test the flow click the small box (1) left from the timestamp inspect node. C
 Congratulations, you connected all three parts of the demo application!! The frontend (Node-RED) invokes via a REST call the business service. The business service uses the Hyperledger Fabric SDK to invoke a transaction of the smart contract and transact with the blockchain network.
 
 ### Build a basic dashboard to create project pledges
-Okay, agreed, this still is a very minimalistic UI...Therefore, let's extend it a bit and create a web UI that can be used to create new project pledges. For this, copy the content of the `create-project-pledge.json` in the `frontend` folder of the `hlfabric-lab-code` repo to your clipboard. Next, click the menu (1) on the top-right. Select Import (2), followed by Clipboard (3). 
+Okay, agreed, this still is a very minimalistic UI...Therefore, let's extend it a bit and create a web UI that can be used to create new project pledges. For this, click the menu (1) on the top-right and select Import (2).
 
 ![](./images/35-connecting-parts-15.png)
 
-Now, use CTRL-V to paste the clipboard and click 'Import' (1) to complete the import. 
+Next, click 'select a file to import' (1) and browse to the `frontend` folder of the `hlfabric-lab-code` repo. Select the file `create-project-pledge.json` and make sure 'new flow' (2) is selected. This will import the flow as a new flow in a separate tab. Finally, click Import (3) to complete the import.
 
 ![](./images/36-connecting-parts-16.png)
 
