@@ -2,15 +2,47 @@
 Imagine if every citizen had the confidence that philanthropic commitments to support societal challenges such as extreme poverty were being honored. That resources were in fact filtering down to the people with the greatest needs. That every dollar donated and spent was making a real impact. Wouldn’t a more transparent system motivate people to more readily champion worthy causes? Or better yet, inspire them to donate more themselves?
 Complete this pattern to build a simple blockchain network using Hyperledger Fabric, on which cause-specific pledges and fund transfers are made by the government, registered with aid organizations, and validated by Global Citizen.
 
-Audience level: Intermediate Developers
+**Audience level**: Intermediate Developers
 
 ## Prerequisites
 
-1. Free [IBM Cloud account](https://ibm.biz/Bdz2vG)
-2. The VirtualBox image containing Hyperledger Fabric and all other pre-reqs to complete this pattern
-3. VirtualBox 6.x
+All necessary prereqs to sucessfully complete this workshop have been put together in a virtual image. A VMware based image and a VirtualBox based image have been prepared. Make your choice and select one of the options below to complete the prereqs. 
 
-Once VirtualBox 6.x is installed on your environment, double-click on the `Hyperledger Fabric.ova` file and accept the defaults to import it into VirtualBox.
+<details>
+  <summary>Using VirtualBox</summary>
+  
+  1. The [VirtualBox image]() containing Hyperledger Fabric and all other pre-reqs to complete this workshop.
+  
+  2. VirtualBox 6.x: [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads)
+
+  Once VirtualBox 6.x is installed on your system, double-click the file `Hyperledger Fabric.ova` and accept all defaults to import it into VirtualBox.
+
+</details>
+
+<details>
+  <summary>Using VMware</summary>
+
+  1. The [VMware image]() containing Hyperledger Fabric and all other pre-reqs to complete this workshop.
+
+  2. VMware player: [https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html)
+
+Once VMware Player is installed on your system, double-click he file `Hyperledger Fabric (xenial based).vmx` in the folder `Hyperledger Fabric (xenial based).vmwarevm` and accept all defaults to import the image into VMware Player.
+
+</details>
+
+or when you prefer not to use a virtual image and wanna set up everything yourself...
+
+<details>
+  <summary>Install all prereqs on your own machine</summary>
+
+  1. Follow the steps at the **Requirements** section of the IBM Blockchain extension for Visual Code at:
+
+  <li>https://github.com/IBM-Blockchain/blockchain-vscode-extension</li>
+
+</details>
+
+#### IBM Cloud Account
+All options require an IBM Cloud account, so if you don't already have one, you can create one for free at: https://ibm.biz/Bdz2vG
 
 ## Overview
 The image below gives a high level overview of the scenario described above and will form the basis of our demo application. The original idea comes from the 'Tracking Donations with blockchain' code pattern and is modified so that it can also be deployed to the IBM Blockchain Platform V2.0 service.
@@ -56,7 +88,7 @@ Login with your Node-RED credentials (the userid/password you specified in the w
 
 ![](./images/08-nodered-6.png)
 
-Next, click Install (1) and type 'dashboard' in the search bar (2). Click Install (3) to start the installation of the Node-RED dashboard nodes. 
+Next, click Install (1) and type 'dashboard' in the search bar (2). In the search results look for `node-red-dashboard` and click Install (3) to start the installation of the Node-RED dashboard nodes (). 
 
 ![](./images/09-nodered-7.png)
 
@@ -76,7 +108,7 @@ The first step is to change directory to the `Development/blockchain` folder and
 
 ```
 cd ~/Development/blockchain
-git clone https://github.com/eciggaar/hlfabric-lab-code
+git clone https://github.com/IBMDeveloperBNL/hlfabric-lab-code
 ```
 
 This will download the necessary code snippets (needed to complete this guide) to your VirtualBox environment. At the command prompt of the terminal session, make sure your current directory is the `Development/blockchain` folder and type:
@@ -85,7 +117,7 @@ This will download the necessary code snippets (needed to complete this guide) t
 lb4 my-bc-app
 ```
 
-This invokes the application generator and generates a basic LoopBack application with the name `my-bc-app`. Hit <Enter> to accept the defaults. Once the basic application has been generated, change directory into the `my-bc-app` folder and invoke the OpeAPI generator to complete the set-up of our business service.
+This invokes the application generator and generates a basic LoopBack application with the name `my-bc-app`. Hit \<Enter> to accept the defaults. Once the basic application has been generated, change directory into the `my-bc-app` folder and invoke the OpeAPI generator to complete the set-up of our business service.
 
 ```
 cd ~/Development/blockchain/my-bc-app
@@ -218,7 +250,7 @@ Next, choose your `smart-contract` folder as workspace folder to package (1).
 
 ![](./images/17-smart-contract-5.png)
 
-The result should be a `global-citizen@0.0.1` package under the 'Smart Contract Packages' palette. Next, make sure your local fabric is started by checking the 'Local Fabric Ops' palette. If you see the message 'Local Fabric runtime is stopped...', click that message to start your local blockchain network. If the network is started, click instantiate (1) and hit <Enter> to accept 'mychannel' (2) as channel to instantiate the contract on. Make sure the global-citizen@0.0.1 package is selected when asked which package to select. Hit <Enter> to accept the defaults on all other questions asked.
+The result should be a `global-citizen@0.0.1` package under the 'Smart Contract Packages' palette. Next, make sure your local fabric is started by checking the 'Local Fabric Ops' palette. If you see the message 'Local Fabric (click to start)', click that message to start your local blockchain network. If the network is started, click instantiate (1) and hit \<Enter\> to accept 'mychannel' (2) as channel to instantiate the contract on. Make sure the global-citizen@0.0.1 package is selected when asked which package to select. Hit \<Enter\> to accept the defaults on all other questions asked.
 
 ![](./images/39-smart-contract-9.png)
 
@@ -585,15 +617,21 @@ Note the funds object that is part of the project pledge now. If you invoke tran
 
 ### Connecting the business service to the frontend
 
-As the business service exposes the transactions as RESTful endpoints, it is relatively easy to connect the frontend to it. The most important part is to open up the local running business sevice to the outside world. This is done via a tool called `ngrok`. To start this, open a separate tab in the terminal that you opened in your Virtual Box environment and type `ngrok http 3000`. This will create a secure tunnel that allows communication (HTTP) from the outside world towards your locahost (the VirtualBox image) listening on port 3000.
+As the business service exposes the transactions as RESTful endpoints, it is relatively easy to connect the frontend to it. The most important part is to open up the local running business sevice to the outside world. This is done via a tool called `ngrok`. To start this, open a separate tab in the terminal that you opened in your Virtual Box environment and type 
+
+```
+ngrok http 3000
+```
+
+This will create a secure tunnel that allows communication (HTTP) from the outside world towards your locahost (the VirtualBox image) listening on port 3000.
 
 ![](./images/29-connecting-parts-9.png)
 
-The result should be look like:
+The result should look like:
 
 ![](./images/30-connecting-parts-10.png)
 
-At this point your running business service should also be accessible via (1). Try this in your browser to verify this is true for you as well.
+At this point your running business service should also be accessible via the URL above (1). Try this in your browser to verify this is true for you as well.
 
 To show that the frontend can connect to the business service, open a new tab in your browser and look up the app URL of the Node-RED application that you deployed in Part 1. Paste this URL. On the Node-RED welcome page that is shown, click the 'Go to your Node-RED editor' button to open your flow editor. Logon with your Node-RED userid / password when needed (also created in Part 1). On the empty canvas, we will create a very simple flow that, on request, reads a project pledge with a given pledgeId and then, sends the output to the debug node. 
 
@@ -601,7 +639,7 @@ From the node pallet drag the inject node (1) and the debug node (2) to the canv
 
 ![](./images/31-connecting-parts-11.png)
 
-Now scroll down in the node pallet till you see the 'function' section and drag the HTTP request node (1) onto the canvas as well. Connect the three nodes together as shown at (2) in the screenshot below. 
+Now scroll down in the node pallet till you see the 'network' section and drag the HTTP request node (1) onto the canvas as well. Connect the three nodes together as shown at (2) in the screenshot below. 
 
 ![](./images/32-connecting-parts-12.png)
 
