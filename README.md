@@ -1,12 +1,12 @@
 # How blockchain can make a real difference
-Imagine if every citizen had the confidence that philanthropic commitments to support societal challenges such as extreme poverty were being honored. That resources were in fact filtering down to the people with the greatest needs. That every dollar donated and spent was making a real impact. Wouldn’t a more transparent system motivate people to more readily champion worthy causes? Or better yet, inspire them to donate more themselves?
+Imagine every citizen had the confidence that philanthropic commitments to support societal challenges such as extreme poverty were being honored. That resources were in fact filtering down to the people with the greatest needs. That every dollar donated and spent was making a real impact. Wouldn’t a more transparent system motivate people to more readily champion worthy causes? Or better yet, inspire them to donate more themselves?
 Complete this pattern to build a simple blockchain network using Hyperledger Fabric, on which cause-specific pledges and fund transfers are made by the government, registered with aid organizations, and validated by Global Citizen.
 
 **Audience level**: Intermediate Developers
 
 ## Prerequisites
 
-All necessary prereqs to sucessfully complete this workshop have been put together in a virtual image. A VMware based image and a VirtualBox based image have been prepared. Make your choice and select one of the options below to complete the prereqs. 
+All necessary prereqs to sucessfully complete this workshop have been put together in a virtual image. A VMware based image and a VirtualBox based image have been prepared. Please select one of the options below to complete the prereqs. 
 
 <details>
   <summary>Using VirtualBox</summary>
@@ -45,15 +45,15 @@ or when you prefer not to use a virtual image and wanna set up everything yourse
 All options require an IBM Cloud account, so if you don't already have one, you can create one for free at: https://ibm.biz/Bdz36u
 
 ## Overview
-The image below gives a high level overview of the scenario described above and will form the basis of our demo application. The original idea comes from the 'Tracking Donations with blockchain' code pattern and is modified so that it can also be deployed to the IBM Blockchain Platform V2.0 service.
+The image below depicts a high level overview of the scenario described above and will form the basis of our application. The original idea comes from the 'Tracking Donations with blockchain' code pattern and has been modified so that it can be deployed to the IBM Blockchain Platform service.
 
 ![](./images/01-overview-1.png)  
 
-The application to support the above process involves a frontend, a business service and a smart contract. The smart contract will have as asset the cause-specific pledge (called the project pledge) and the transactions: `createProjectPledge`, `sendPledgeToGlobalCitizen`, `sendPledgeToGovOrg`, `updatePledge` and `transferFunds`. The business service implements the logic to support the transactions and finally exposes them as RESTful endpoints. The business service communicates with the smart contract via the Hyperledger Fabric SDK. The transaction invoked on the smart contract updates the ledger. All this is depicted in the schematic overview below.
+The application to support the above process involves a frontend, a business service and a smart contract. The smart contract contains the asset `pledge` -- representing the cause-specific pledge -- and the transactions: `createProjectPledge`, `sendPledgeToGlobalCitizen`, `sendPledgeToGovOrg`, `updatePledge` and `transferFunds`. The business service works as middle layer and exposes the REST API. The business service interacts with the smart contract using the Hyperledger Fabric NodeJS SDK. The transaction invoked on the smart contract updates the ledger. All this is depicted in the schematic overview below.
 
 ![](./images/02-overview-2.png)  
 
-As you can see in the image, building this demo application consists of three major steps. The fourth and last step is connecting all parts.
+As you can see in the image, building this application consists of three major steps. The fourth and last step is connecting the dots and integrating all parts.
 
 ## Steps
 1. [Build a frontend in Node-RED](#1-build-a-front-end-in-node-red)
