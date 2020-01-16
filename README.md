@@ -72,7 +72,7 @@ Give the service a unique name (1) and select a nearby region to deploy to (e.g.
 
 The deployment takes a couple of minutes to complete, so you might want to move on to [Part 2](#2-build-the-business-service) and start the creation of your business service and return later to complete the setup of your frontend.
 
-Once the deployment successfully completed and the app is awake, visit the app URL by clicking on the 'Visit App URL' (1).
+Once the deployment successfully completed and the app is awake, click 'Visit App URL' (1).
 
 ![](./images/05-nodered-3.png)
 
@@ -100,9 +100,9 @@ This completes the first section. You just created a Node-RED application on IBM
 
 ## 2. Build the Business Service
 
-The business service is generated using the so-called LoopBack framework. LoopBack is a highly extensible, open-source Node.js and TypeScript framework based on Express that enables you to quickly create APIs and microservices composed from backend systems such as databases and SOAP or REST services. See the [LoopBack.io](https://loopback.io) site for more details.
+The business service is generated using the so-called LoopBack framework. LoopBack is a highly extensible, open-source Node.js and TypeScript framework based on Express that enables you to quickly create APIs and microservices composed from backend systems such as databases and SOAP or REST services. See the [LoopBack.io](https://loopback.io) site for more information if you want to learn more about this framework.
 
-Two generators are used, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service and which are defined in the included `openapi.json` file. For this part of the pattern you need to start the virtual image. Once the image is completely up and running, open a terminal session by clicking the terminal icon (1). 
+For our application we use two generators, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service. They are defined in the file `openapi.json` file. For this part of the lab you need to start the virtual image. Once the image is completely up and running, open a terminal session by clicking the terminal icon (1). 
 
 ![](./images/11-build-service-1.png)
 
@@ -119,14 +119,14 @@ This will download the necessary code snippets to your virtual image. Next, in t
 lb4 my-bc-app
 ```
 
-This invokes the application generator, which generates a basic LoopBack application with the name `my-bc-app`. Hit '\<Enter>' on all questions asked to accept the default values. Once the application has been generated, change directory to the `my-bc-app` folder and invoke the OpeAPI generator to complete the set-up of our business service.
+This invokes the application generator, which generates a basic LoopBack application with the name `my-bc-app`. Hit \<Enter> on all questions asked to accept the default values. Once the application has been generated, change directory to the `my-bc-app` folder and invoke the OpenAPI generator to complete the set-up of your business service.
 
 ```
 cd ~/Development/blockchain/my-bc-app
 lb4 openapi --url ../hlfabric-lab-code/business-service/openapi.json --validate true
 ```
 
-Again, accept all defaults. The second command generates the models and controllers needed for the business service. They are defined in the `openapi.json` file. Browse to the `hlfabric-lab-code` folder to manually inspect the JSON file. You'll see definitions for the `ProjectPledge` asset as well as transactions like `createProjectPledge` and `transferFunds`.
+Again, hit \<Enter> to accept all defaults. The second `lb4` command generates the models and controllers needed for the business service. They are defined in the `openapi.json` file. Browse to the `hlfabric-lab-code/business-service` folder to manually inspect the JSON file. You'll see definitions for the `ProjectPledge` asset as well as transactions like `createProjectPledge` and `transferFunds`.
 
 Finally, the skeleton for the business service can be tested by typing `npm start` (current directory should be `my-bc-app`).
 
