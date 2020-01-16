@@ -117,18 +117,19 @@ This will download the necessary code snippets to your virtual image. Next, in t
 lb4 my-bc-app
 ```
 
-This invokes the application generator, which generates a basic LoopBack application with the name `my-bc-app`. Hit \<Enter> to accept the defaults. Once the basic application has been generated, change directory into the `my-bc-app` folder and invoke the OpeAPI generator to complete the set-up of our business service.
+This invokes the application generator, which generates a basic LoopBack application with the name `my-bc-app`. Hit '\<Enter>' on all questions asked to accept the default values. Once the application has been generated, change directory to the `my-bc-app` folder and invoke the OpeAPI generator to complete the set-up of our business service.
 
 ```
 cd ~/Development/blockchain/my-bc-app
 lb4 openapi --url ../hlfabric-lab-code/business-service/openapi.json --validate true
 ```
 
-Again, accept all defaults. The second command generates the models and controllers needed for the business service. They are defined in the `openapi.json` file. Browse to the `hlfabric-lab-code` folder to manually inspect the JSON file. You'll see definitions for the project pledge asset as well as transactions like `createProjectPledge` and `transferFunds`.
+Again, accept all defaults. The second command generates the models and controllers needed for the business service. They are defined in the `openapi.json` file. Browse to the `hlfabric-lab-code` folder to manually inspect the JSON file. You'll see definitions for the `ProjectPledge` asset as well as transactions like `createProjectPledge` and `transferFunds`.
 
 Finally, the skeleton for the business service can be tested by typing `npm start` (current directory should be `my-bc-app`).
 
 ```
+cd ~/Development/blockchain/my-bc-app
 npm start
 ```
 
