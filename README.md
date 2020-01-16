@@ -45,11 +45,11 @@ or when you prefer not to use a virtual image and wanna set up everything yourse
 All options require an IBM Cloud account, so if you don't already have one, you can create one for free at: https://ibm.biz/Bdz647
 
 ## Overview
-The image below depicts a high level overview of the scenario described above and will form the basis of our application. The original idea comes from the 'Tracking Donations with blockchain' code pattern and has been modified so that it can be deployed to the IBM Blockchain Platform service.
+The image below depicts a high level overview of the tracking donations scenario and will form the basis of our application. The original idea comes from the 'Tracking Donations with blockchain' code pattern and has been modified so that it can be deployed to the IBM Blockchain Platform service.
 
 ![](./images/01-overview-1.png)  
 
-The application to support the above process involves a frontend, a business service and a smart contract. The smart contract contains the asset `pledge` -- representing the cause-specific pledge -- and the transactions: `createProjectPledge`, `sendPledgeToGlobalCitizen`, `sendPledgeToGovOrg`, `updatePledge` and `transferFunds`. The business service works as middle layer and exposes the REST API. The business service interacts with the smart contract using the Hyperledger Fabric NodeJS SDK. The transaction invoked on the smart contract updates the ledger. All this is depicted in the schematic overview below.
+The application to support the above process involves a frontend, a business service and a smart contract. The latter contains the asset `ProjectPledge`, representing the cause-specific pledge, and the following transactions: `createProjectPledge`, `sendPledgeToGlobalCitizen`, `sendPledgeToGovOrg`, `updatePledge` and `transferFunds`. The business service works as middle layer and exposes the REST API. It interacts with the smart contract using the Hyperledger Fabric NodeJS SDK. The transaction invoked on the smart contract updates the ledger. All this is depicted in the schematic overview below.
 
 ![](./images/02-overview-2.png)  
 
