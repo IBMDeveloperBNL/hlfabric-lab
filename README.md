@@ -72,15 +72,15 @@ Give the service a unique name (1) and select a nearby region to deploy to (e.g.
 
 The deployment takes a couple of minutes to complete, so you might want to move on to [Part 2](#2-build-the-business-service) and start the creation of your business service and return later to complete the setup of your frontend.
 
-Once the deployment is successfully completed, visit the app URL by clicking on the 'Visit App URL' (1) on the image below.
+Once the deployment successfully completed and the app is awake, visit the app URL by clicking on the 'Visit App URL' (1).
 
 ![](./images/05-nodered-3.png)
 
-Next, complete the Node-RED initial set-up wizard. Click Next on the first screen and choose a userid/password on the second one to secure your Node-RED environment. Click Next (1) and Next again to go to the final overview page of the wizard. Click Finish to complete it. 
+Next, complete the Node-RED initial set-up wizard. Click 'Next' on the first screen and choose a userid/password on the second one to secure your Node-RED environment. Click 'Next' (1) and 'Next' again to go to the final overview page of the wizard. Click 'Finish' to complete the wizard. 
 
 ![](./images/06-nodered-4.png)
 
-On the welcome page click on the 'Go to your Node-RED flow editor' button.
+On the welcome page click on the **Go to your Node-RED flow editor** button.
 
 ![](./images/07-nodered-5.png)
 
@@ -88,7 +88,7 @@ Login with your Node-RED credentials (the userid/password you specified in the w
 
 ![](./images/08-nodered-6.png)
 
-Next, click Install (1) and type 'dashboard' in the search bar (2). In the search results look for `node-red-dashboard` and click Install (3) to start the installation of the Node-RED dashboard nodes (). 
+Next, click 'Install' (1) and type `dashboard` in the search bar (2). In the search results look for `node-red-dashboard` and click 'Install' (3) to start the installation of the Node-RED dashboard nodes. 
 
 ![](./images/09-nodered-7.png)
 
@@ -96,28 +96,28 @@ Once the installation successfully completes, click 'Close' (4) to close the pal
 
 ![](./images/10-nodered-8.png)
 
-For now, this completes the first step. You just created a Node-RED application on IBM Cloud that serves as frontend and that is ready to consume some REST services...
+This completes the first section. You just created a Node-RED application on IBM Cloud that will serve as frontend and that is ready to consume some REST services... :smiley:
 
 ## 2. Build the Business Service
 
-The business service is generated using the LoopBack framework. Two generators are used, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service and that are defined in the included `openapi.json` file. For this part of the pattern you need to start the VirtualBox image. Once the image is completely up and running, open a terminal session (1). 
+The business service is generated using the so-called LoopBack framework. Two generators are used, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service and which are defined in the included `openapi.json` file. For this part of the pattern you need to start the virtual image. Once the image is completely up and running, open a terminal session by clicking the terminal icon (1). 
 
 ![](./images/11-build-service-1.png)
 
-The first step is to change directory to the `Development/blockchain` folder and to clone the following git repository. 
+The first step is to change directory to the `Development/blockchain` folder and to clone the `hlfabric-lab-code` git repository. 
 
 ```
 cd ~/Development/blockchain
 git clone https://github.com/IBMDeveloperBNL/hlfabric-lab-code
 ```
 
-This will download the necessary code snippets (needed to complete this guide) to your VirtualBox environment. At the command prompt of the terminal session, make sure your current directory is the `Development/blockchain` folder and type:
+This will download the necessary code snippets to your virtual image. Next, in the terminal session, make sure the current directory is the `Development/blockchain` folder and type:
 
 ```
 lb4 my-bc-app
 ```
 
-This invokes the application generator and generates a basic LoopBack application with the name `my-bc-app`. Hit \<Enter> to accept the defaults. Once the basic application has been generated, change directory into the `my-bc-app` folder and invoke the OpeAPI generator to complete the set-up of our business service.
+This invokes the application generator, which generates a basic LoopBack application with the name `my-bc-app`. Hit \<Enter> to accept the defaults. Once the basic application has been generated, change directory into the `my-bc-app` folder and invoke the OpeAPI generator to complete the set-up of our business service.
 
 ```
 cd ~/Development/blockchain/my-bc-app
