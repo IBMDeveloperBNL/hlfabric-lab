@@ -26,7 +26,7 @@ All necessary prereqs to sucessfully complete this workshop have been put togeth
 
   2. VMware player: [https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html)
 
-Once VMware Player is installed on your system, double-click he file `Hyperledger Fabric (xenial based).vmx` in the folder `Hyperledger Fabric (xenial based).vmwarevm` and accept all defaults to import the image into VMware Player.
+Once VMware Player is installed on your system, double-click he file `Hyperledger Fabric.vmx` in the folder `Hyperledger Fabric.vmwarevm` and accept all defaults to import the image into VMware Player.
 
 </details>
 
@@ -42,7 +42,7 @@ or when you prefer not to use a virtual image and wanna set up everything yourse
 </details>
 
 #### IBM Cloud Account
-All options require an IBM Cloud account, so if you don't already have one, you can create one for free at: https://ibm.biz/Bdz36u
+All options require an IBM Cloud account, so if you don't already have one, you can create one for free at: https://ibm.biz/Bdz647
 
 ## Overview
 The image below depicts a high level overview of the scenario described above and will form the basis of our application. The original idea comes from the 'Tracking Donations with blockchain' code pattern and has been modified so that it can be deployed to the IBM Blockchain Platform service.
