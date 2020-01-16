@@ -100,7 +100,9 @@ This completes the first section. You just created a Node-RED application on IBM
 
 ## 2. Build the Business Service
 
-The business service is generated using the so-called LoopBack framework. Two generators are used, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service and which are defined in the included `openapi.json` file. For this part of the pattern you need to start the virtual image. Once the image is completely up and running, open a terminal session by clicking the terminal icon (1). 
+The business service is generated using the so-called LoopBack framework. LoopBack is a highly extensible, open-source Node.js and TypeScript framework based on Express that enables you to quickly create APIs and microservices composed from backend systems such as databases and SOAP or REST services. See the [LoopBack.io](https://loopback.io) site for more details.
+
+Two generators are used, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service and which are defined in the included `openapi.json` file. For this part of the pattern you need to start the virtual image. Once the image is completely up and running, open a terminal session by clicking the terminal icon (1). 
 
 ![](./images/11-build-service-1.png)
 
