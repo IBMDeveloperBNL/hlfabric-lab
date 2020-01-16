@@ -53,7 +53,7 @@ The application to support the above process involves a frontend, a business ser
 
 ![](./images/02-overview-2.png)  
 
-As you can see in the image, building this application consists of three major steps. The fourth and last step is connecting the dots and integrating all parts.
+As you can see in the image, building this application consists of three major steps. The fourth and last step is to connect the dots and to integrate all parts.
 
 ## Steps
 1. [Build a frontend in Node-RED](#1-build-a-front-end-in-node-red)
@@ -96,7 +96,7 @@ Once the installation successfully completes, click 'Close' (4) to close the pal
 
 ![](./images/10-nodered-8.png)
 
-This completes the first section. You just created a Node-RED application on IBM Cloud that will serve as frontend and that is ready to consume some REST services... :smiley:
+This completes the first section. You just created a Node-RED application on IBM Cloud that will serve as frontend and that is ready to consume some REST services... :+1:
 
 ## 2. Build the Business Service
 
