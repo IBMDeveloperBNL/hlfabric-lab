@@ -62,11 +62,11 @@ As you can see in the image, building this application consists of three major s
 4. [Connecting all parts](#4-connecting-all-parts)
 
 ## 1. Build a frontend in Node-RED
-Logon to IBM Cloud using the free account you just created. Next, click the 'Catalog' on the top bar (1) and then search for Node-RED (2). Finally, click on the starter kit 'Node-RED Starter'.
+Logon to IBM Cloud using the free account you just created. Next, enter 'Node' as search argument in the search bar (1). In the search results, select the Node-RED Starter kit (2).
 
 ![](./images/03-nodered-1.png)  
 
-Give the service a unique name (1) and select a nearby region to deploy to (e.g. London or Frankfurt). Click 'Create' (2) to create the service. 
+Ensure your region matches the one assigned to your Lite account and scroll down to give the service a unique name (1). Verify the selected plans are Lite plans and click 'Create' (2) to create the service. 
 
 ![](./images/04-nodered-2.png)
 
