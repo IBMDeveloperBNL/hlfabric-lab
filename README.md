@@ -70,7 +70,7 @@ Ensure your region matches the one assigned to your Lite account and scroll down
 
 ![](./images/04-nodered-2.png)
 
-The deployment takes a couple of minutes to complete, so you might want to move on to [Part 2](#2-build-the-business-service) and start the creation of your business service and return later to complete the setup of your frontend.
+The deployment takes a couple of minutes to complete, so you might want to move on to [Part 2](#2-build-the-business-service) to create your business service and return later to complete the setup of the frontend service.
 
 Once the deployment successfully completed and the app is awake, click 'Visit App URL' (1).
 
