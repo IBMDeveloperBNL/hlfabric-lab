@@ -49,7 +49,7 @@ The image below depicts a high level overview of the tracking donations scenario
 
 ![](./images/01-overview-1.png)  
 
-The application to support the above process involves a frontend, a business service and a smart contract. The latter contains the asset `ProjectPledge`, representing the cause-specific pledge, and the following transactions: `createProjectPledge`, `sendPledgeToGlobalCitizen`, `sendPledgeToGovOrg`, `updatePledge` and `transferFunds`. The business service works as middle layer and exposes the REST API. It interacts with the smart contract using the Hyperledger Fabric NodeJS SDK. The transaction invoked on the smart contract updates the ledger. All this is depicted in the schematic overview below.
+The application to support the above process involves a frontend, a business service and a smart contract. The latter contains the asset `ProjectPledge`, representing the cause-specific pledge, and the following transactions: `createProjectPledge`, `sendPledgeToGlobalCitizen`, `sendPledgeToGovOrg`, `updatePledge` and `transferFunds`. The business service works as middle layer and exposes the REST API. It interacts with the smart contract using the Hyperledger Fabric Node.js SDK. The transaction invoked on the smart contract updates the ledger. All this is depicted in the schematic overview below.
 
 ![](./images/02-overview-2.png)  
 
@@ -102,7 +102,7 @@ This completes the first section. You just created a Node-RED application on IBM
 
 The business service is generated using the so-called LoopBack framework. LoopBack is a highly extensible, open-source Node.js and TypeScript framework based on Express that enables you to quickly create APIs and microservices composed from backend systems such as databases and SOAP or REST services. See the [LoopBack.io](https://loopback.io) site for more information if you want to learn more about this framework.
 
-For our application we use two generators, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service. They are defined in the file `openapi.json` file. For this part of the lab you need to start the virtual image. Once the image is completely up and running, open a terminal session by clicking the terminal icon (1). 
+For our application we use two generators, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service. They are defined in the file `openapi.json` file. For this part of the lab you need to start the virtual image. Once the image is completely up and running, open a terminal session (1). 
 
 ![](./images/11-build-service-1.png)
 
@@ -119,14 +119,14 @@ This will download the necessary code snippets to your virtual image. Next, in t
 lb4 my-bc-app
 ```
 
-This invokes the application generator, which generates a basic LoopBack application with the name `my-bc-app`. Hit \<Enter> on all questions asked to accept the default values. Once the application has been generated, change directory to the `my-bc-app` folder and invoke the OpenAPI generator to complete the set-up of your business service.
+This invokes the application generator, which generates a basic LoopBack application with the name `my-bc-app`. Hit \<Enter\> on all questions asked to accept the default values. Once the application has been generated, change directory to the `my-bc-app` folder and invoke the OpenAPI generator to complete the set-up of your business service.
 
 ```
 cd ~/Development/blockchain/my-bc-app
 lb4 openapi --url ../hlfabric-lab-code/business-service/openapi.json --validate true
 ```
 
-Again, hit \<Enter> to accept all defaults. The second `lb4` command generates the models and controllers needed for the business service. They are defined in the `openapi.json` file. Browse to the `hlfabric-lab-code/business-service` folder to manually inspect the JSON file. You'll see definitions for the `ProjectPledge` asset as well as transactions like `createProjectPledge` and `transferFunds`.
+Again, hit \<Enter\> to accept the defaults. The `lb4` command with the `openapi` option generates the necessary models and controllers as defined in the file `openapi.json`. Browse to the `business-service` subfolder of `hlfabric-code` to manually inspect the JSON file. You'll see definitions for the `ProjectPledge` asset as well as for transactions like `createProjectPledge` and `transferFunds`.
 
 Finally, the skeleton for the business service can be tested by typing `npm start` (current directory should be `my-bc-app`).
 
@@ -137,11 +137,11 @@ npm start
 
 Now open a browser session and browse to [http://localhost:3000/explorer](http://localhost:3000/explorer). This gives an overview of all available REST endpoints of our business service. 
 
-Try to invoke one of the endpoints (e.g. createProjectPledge) by clicking on the service (1). Next, click 'Try it out' (2) and provide some sample values (3). Finally, click 'Execute' (4) to submit the request and test the service. 
+Try to invoke one of the endpoints, e.g. `/CreateProjectPledge`, by clicking on the service (1). Next, click 'Try it out' (2) and provide some sample values (3). Finally, click 'Execute' (4) to submit the request and to test the service. 
 
 ![](./images/12-build-service-2.png)
 
-The response will be a '500 Internal Server Error'. The reason for this is, that this is the current implementation of the service. It throws exactly this error message.
+The response will be a '500 Internal Server Error'. This is by design....:smiley: The current implementation of the service throws exactly this error message.
 
 ```ts
 export class CreateProjectPledgeController {
@@ -157,13 +157,13 @@ export class CreateProjectPledgeController {
 }
 ```
 
-It is our job to implement the business service in a meaningful way. This is done in Part 4 of this pattern, but first we have to develop the smart contract.
+It is our job to implement the business service in a meaningful way. This is done in [Part 4](#4-connecting-all-parts) of this pattern, but first we have to develop the smart contract.
 
 ## 3. Build the Smart Contract
 
 Typically, business rules that need to be executed --- before a transaction can be recorded on the blockchain --- are captured in a so-called smart contract, also referred to as chaincode in Hyperledger Fabric. As this is an important part of our application, it is good to get familiar with the basics of smart contract development in Hyperledger Fabric. 
 
-For this, we will follow the beginner tutorial that is part of the IBM Blockchain extension in Visual Code. After you completed the tutorial you should have a better understanding of how to develop and debug smart contracts as well as of how to deploy them to your network. The IBM blockchain extension itself is built to provide developers an integrated workflow for building blockchain applictions. 
+For this, we will follow the beginner tutorial that is part of the IBM Blockchain extension in Visual Code. After you completed the tutorial you should have a better understanding of how to develop and debug smart contracts, as well as of how to deploy them to your local HyperLedger Fabric network. The IBM blockchain extension itself is built to provide developers an integrated workflow for building blockchain applictions. 
 
 To get started with the tutorial, click on the Visual Code launcher (1) in your VirtualBox image.
 
@@ -177,14 +177,14 @@ Next click the 'Local smart contract development' tutorial. This one takes you t
 
 ![](./images/40-smart-contract-10.png)
 
-At this point, you have completed the tutorial and gained basic knowledge on smart contract development. The next step is to build the smart contract for the tracking donations use case. For this, change directory to `smart-contract` folder in the `hlfabric-lab-code` repo and run `npm install`.
+At this point, you should have completed the tutorial and gained some basic knowledge on smart contract development. The next step is to build the smart contract for the tracking donations use case. For this, open a terminal session and change directory to `smart-contract` folder in the `hlfabric-lab-code` repo and run the following commands.
 
 ```
 cd ~/Development/blockchain/hlfabric-lab-code/smart-contract
 npm install
 ```
 
-Next, add the `smart-contract` sub-folder to your workspace in Visual Code. Your workspace should look similar to:
+Next, add the `smart-contract` folder to your workspace in Visual Code. Your workspace should look similar to:
 
 ![](./images/15-smart-contract-3.png)
 
@@ -253,19 +253,21 @@ Next, choose your `smart-contract` folder as workspace folder to package (1).
 
 ![](./images/17-smart-contract-5.png)
 
-The result should be a `global-citizen@0.0.1` package under the 'Smart Contract Packages' palette. Next, make sure your local fabric is started by checking the 'Local Fabric Ops' palette. If you see the message 'Local Fabric (click to start)', click that message to start your local blockchain network. If the network is started, click instantiate (1) and hit \<Enter\> to accept 'mychannel' (2) as channel to instantiate the contract on. Make sure the global-citizen@0.0.1 package is selected when asked which package to select. Hit \<Enter\> to accept the defaults on all other questions asked.
+This will result in a `global-citizen@0.0.1` package under the 'Smart Contract Packages' palette. Next, make sure your local fabric is started by checking the 'Local Fabric Ops' palette. If you see the message 'Local Fabric (click to start)', click that message to start your local blockchain network. 
+
+Once the network is started, click instantiate (1). Make sure the `global-citizen@0.0.1` package is selected when asked which package to select. Hit \<Enter\> to accept the defaults on all other questions asked.
 
 ![](./images/39-smart-contract-9.png)
 
-The final step in this section is to test whether the smart contract was successfully deployed. For this, click on the contract in the Fabric Gateways panel (expand local_fabric, then click mychannel -> global-citizen@0.0.1). Now, click the createProjectPledge (1) method and select 'Submit Transaction' (2).
+The final step in this section is to test whether the smart contract was successfully deployed. For this, click on the contract in the Fabric Gateways panel (expand Local Fabric, then click mychannel -> global-citizen@0.0.1). Now, select the createProjectPledge (1) method and right-click this method to select 'Submit Transaction' (2).
 
 ![](./images/18-smart-contract-6.png)
 
-Pass the argument string `["aid1","001","test","test desc","100000"]` to the function and hit Enter.
+Pass the argument string `["aid1","001","test","test desc","100000"]` to the function and hit \<Enter\>. Don't provide any transient data when asked for, just hit \<Enter\> to continue.
 
 ![](./images/19-smart-contract-7.png)
 
-The transaction should complete successfully. Finally, test whether you can read the project pledge by invoking the `readProjectPledge` function. Pass `["aid1:001"]` as pledgeId and check if the response matches the screenshot below.
+The transaction should complete successfully. Finally, test whether you can read the new project pledge by evaluating the `readProjectPledge` function. Pass `["aid1:001"]` as pledgeId and check if the response matches the screenshot below.
 
 ![](./images/20-smart-contract-8.png)
 
@@ -273,7 +275,7 @@ The transaction should complete successfully. Finally, test whether you can read
 
 ### Connect the Business Service to the smart contract
 
-The business service communicates with the smart contract via the Hyperledger Fabric SDK. We concentrated all the communication with the blockchain network in the file `blockchainClient.ts`. To include this file in your project as well, copy it from the `hlfabric-lab-code` repo to the `src` folder of your business service.
+The business service communicates with the smart contract via the Hyperledger Fabric Node.js SDK. We concentrated all the communication with the blockchain network in the file `blockchainClient.ts`. To include this file in your project, copy it from the `hlfabric-lab-code` repo to the `src` folder of your business service.
 
 ```
 cd ~/Development/blockchain
@@ -287,7 +289,7 @@ cd ~/Development/blockchain
 mv ./hlfabric-lab-code/business-service/local_fabric ./my-bc-app
 ```
 
-Now open the blockchain client in Visual Code. An important function in this class is the function `connectToNetwork()`.
+Now open the `blockchainClient.ts` file in Visual Code. An important function in this class is the function `connectToNetwork()`.
 
 ```ts
     async connectToNetwork() {
@@ -319,7 +321,7 @@ Now open the blockchain client in Visual Code. An important function in this cla
     }
 ```
 
-First a connection is made to the gateway using the admin identity of the network (line 30 of the file). Next, an instance of the `mychannel` network is retrieved in line 33. An instance of the contract object is obtained in line 38. Note that in this demo we explicitly look for `global-citizen` as contract name and that this name matches the name of the smart contract that was deployed to the network in part 3 of this pattern. The contract and network are stored in a -- for this purpose created -- object called networkObj. This object is returned to the caller in line 45. 
+First a connection is made to the gateway using the admin identity of the network (line 30 of the file). Next, an instance of the `mychannel` network is retrieved in line 33. An instance of the contract object is obtained in line 38. Note that in this demo we explicitly look for `global-citizen` as contract name and that this name matches the name of the smart contract that was deployed to the network in [Part 3](#3-build-the-smart-contract) of this pattern. The contract and network are stored in a -- for this purpose created -- object called `networkObj`. This object is returned to the caller in line 45. 
 
 Once connected to the network, every transaction has its own function in the client. All functions have the same layout. They expect one generic input object, called `args`. This object needs to have an attribute called `contract` and one called `function`. Besides these two args contain all attributes needed to successfully invoke the smart contract transaction. As an example, the `createProjectPledge` function is listed below.
 
@@ -373,7 +375,7 @@ with the following code:
     }
 ```
 
-You'll probably notice that the blockchainClient variable cannot be resolved. This is because there is no blockchainClient defined in the controller. To define one, type the following line of code above the class definition in the controller.
+You'll probably notice that the `blockchainClient` variable cannot be resolved. This is because there is no `blockchainClient` defined in the controller. To define one, type the following line of code above the class definition in the controller.
 
 ```ts
 let blockchainClient = new BlockChainModule.BlockchainClient();
@@ -402,7 +404,7 @@ export class CreateProjectPledgeController {
   :
 ```
 
-and the errors should have disappeared. Make sure your changes to the controller code are saved. Now repeat this for all other controllers in the folder. Below  the code snippets are listed for each of the controllers.
+and the errors should have disappeared. Make sure your changes to the controller code are saved. Next, repeat this for all other controllers in the folder. Below  the code snippets are listed for each of the controllers.
 
 **project-pledge.controller.ts**
 ```ts
@@ -562,13 +564,18 @@ This will fail with the following error message:
 
 ![](./images/21-connecting-parts-1.png)
 
-The `fabric-network` module is not added as a dependency yet. To add this module, open the `package.json` file in Visual Code and add the following line to the `devDependencies` section.
+The `blockchainClient` class uses the `fabric-network` module, which is not added yet as a dependency. To add this module, open the `package.json` file in Visual Code and add the following line to the `devDependencies` section.
 
 ```
-"fabric-network": "^1.4.2"
+"fabric-network": "^1.4.4"
 ```
 
 Now, run `npm install` in the same directory (`~/Development/blockchain/my-bc-app`) as before.
+
+```
+cd ~/Development/blockchain/my-bc-app
+npm install
+```
 
 When the blockchain network was started for the first time (in Part 3 of this pattern), an admin user was registered with our Certificate Authority. Now we need to send an enroll call to the CA server and retrieve the enrollment certificate (eCert) for this user. We won’t delve into enrollment details here, but suffice by saying that the SDK --- and by extension our applications --- need this cert in order to form a user object for the admin. This user object (identity) is needed to connect to the Hyperledger Fabric gateway (line 30 in the `blockchainClient.ts` file). 
 
@@ -579,20 +586,20 @@ cd ~/Development/blockchain/my-bc-app/local_fabric
 node enrollAdmin.js
 ```
 
-It is time to test the connected business service. For this, start the application by running `npm start` in the root folder of your project.
+Congratulations!! :+1: We can now start to test the connected business service by running `npm start` in the root folder of your project.
 
 ```
 cd ~/Development/blockchain/my-bc-app
 npm start
 ```
 
-The business service can be accessed on [http://localhost:3000/explorer](http://localhost:3000/explorer). Now, test all transactions to make sure the controllers are properly implemented and can access the smart contract.
+The service can be accessed on [http://localhost:3000/explorer](http://localhost:3000/explorer). Now, test all transactions to make sure the controllers are properly implemented and can access the smart contract.
 
-We start with the CreateProjectPledgeController. We create a new project pledge using the parameters as shown in the screenshot below. Remember, to get to the form where you can provide the project pledge details, first click the `CreateProjectPledgeController`. Then, click the POST request `CreateProjectPledge` and finally the 'Try it out' button on the right. The POST request should return with a HTTP 200 OK response message.
+We start with the CreateProjectPledgeController. Create a new project pledge using the parameters as shown in the screenshot below. Remember...to get to the form where you can provide the project pledge details, first click the `CreateProjectPledgeController`. Then, click the POST request `CreateProjectPledge` and finally the 'Try it out' button on the right. The POST request should return with a HTTP 200 OK response message.
 
 ![](./images/22-connecting-parts-2.png)
 
-Next, send this project pledge to the citizen organization for review by invoking the `SendPledgeToGlobalCitizenController` function. If you used the parameters from the screenshot above, you should use 'aid2:002' as plegeId.
+Next, send this project pledge to the citizen organization for review by invoking the `SendPledgeToGlobalCitizenController` function. If you used the parameters from the screenshot above, you should use `aid2:002` as plegeId.
 
 ![](./images/23-connecting-parts-3.png)
 
@@ -600,7 +607,7 @@ Next, send the project pledge to the government organization. Use the same pledg
 
 ![](./images/24-connecting-parts-4.png)
 
-The government organization can update the pledge with the total fund approved, funding type and the fund installment per transfer. To update the project pledge with these details, invoke the controller with the following parameters...
+The government organization can update the project pledge with the total funding approved, the funding type and the fund installment per transfer. To update the project pledge with these details, invoke the controller with the following parameters...
 
 ![](./images/25-connecting-parts-5.png)
 
@@ -616,17 +623,17 @@ You should see an output similar to:
 
 ![](./images/28-connecting-parts-8.png)
 
-Note the funds object that is part of the project pledge now. If you invoke transferFunds again, followed by the above project pledge query, you should see an increase of the `totalFundsReceived` attribute.
+Note the funds object that is part of the project pledge now. If you invoke `transferFunds` again, followed by the above project pledge query, you should see an increase of the `totalFundsReceived` attribute.
 
 ### Connecting the business service to the frontend
 
-As the business service exposes the transactions as RESTful endpoints, it is relatively easy to connect the frontend to it. The most important part is to open up the local running business sevice to the outside world. This is done via a tool called `ngrok`. To start this, open a separate tab in the terminal that you opened in your Virtual Box environment and type 
+As the business service exposes the transactions as RESTful endpoints, it is relatively easy to connect the frontend to it. The most important part is to open up the local running business sevice to the outside world. This is done via a tool called `ngrok`. To start this, open a separate tab in the terminal that you opened in your virtual image and type 
 
 ```
 ngrok http 3000
 ```
 
-This will create a secure tunnel that allows communication (HTTP) from the outside world towards your locahost (the VirtualBox image) listening on port 3000.
+This will create a secure tunnel that allows communication (HTTP) from the outside world towards your locahost (the virtual image) listening on port 3000.
 
 ![](./images/29-connecting-parts-9.png)
 
@@ -634,9 +641,9 @@ The result should look like:
 
 ![](./images/30-connecting-parts-10.png)
 
-At this point your running business service should also be accessible via the URL above (1). Try this in your browser to verify this is true for you as well.
+At this point your running business service should also be accessible via the URL above (1). Try this with your own URL in a browser to verify whether this holds for you as well.
 
-To show that the frontend can connect to the business service, open a new tab in your browser and look up the app URL of the Node-RED application that you deployed in Part 1. Paste this URL. On the Node-RED welcome page that is shown, click the 'Go to your Node-RED editor' button to open your flow editor. Logon with your Node-RED userid / password when needed (also created in Part 1). On the empty canvas, we will create a very simple flow that, on request, reads a project pledge with a given pledgeId and then, sends the output to the debug node. 
+To show that the frontend can connect to the business service, open a new tab in your browser and look up the app URL of the Node-RED application that you deployed in [Part 1](#1-build-a-front-end-in-node-red). Paste this URL. On the Node-RED welcome page, click the 'Go to your Node-RED editor' button to open your flow editor. Logon with your Node-RED userid / password when prompted. On the empty canvas, we will create a very simple flow that, on request, reads a project pledge with a given pledgeId and then, sends the output to the debug node. 
 
 From the node pallet drag the inject node (1) and the debug node (2) to the canvas. 
 
@@ -654,7 +661,7 @@ To test the flow click the small box (1) left from the timestamp inspect node. C
 
 ![](./images/34-connecting-parts-14.png)
 
-Congratulations, you connected all three parts of the demo application!! The frontend (Node-RED) invokes via a REST call the business service. The business service uses the Hyperledger Fabric SDK to invoke a transaction of the smart contract and transact with the blockchain network.
+Congratulations!! :clap: :+1: You connected all three parts of the demo application!! The frontend (Node-RED) invokes via a REST call the business service. The business service uses the Hyperledger Fabric Node.js SDK to invoke a transaction of the smart contract, which in its turn transacts with the blockchain network.
 
 ### Build a basic dashboard to create project pledges
 Okay, agreed, this still is a very minimalistic UI...Therefore, let's extend it a bit and create a web UI that can be used to create new project pledges. For this, click the menu (1) on the top-right and select Import (2).
