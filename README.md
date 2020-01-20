@@ -11,7 +11,7 @@ All necessary prereqs to sucessfully complete this workshop have been put togeth
 <details>
   <summary>Using VirtualBox</summary>
   
-  1. The [VirtualBox image]() containing Hyperledger Fabric and all other pre-reqs to complete this workshop.
+  1. The [VirtualBox image](https://ibm.biz/hlfabric-1) containing Hyperledger Fabric and all other pre-reqs to complete this workshop.
   
   2. VirtualBox 6.x: [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads)
 
@@ -22,7 +22,7 @@ All necessary prereqs to sucessfully complete this workshop have been put togeth
 <details>
   <summary>Using VMware</summary>
 
-  1. The [VMware image]() containing Hyperledger Fabric and all other pre-reqs to complete this workshop.
+  1. The [VMware image](https://ibm.biz/hlfabric-2) containing Hyperledger Fabric and all other pre-reqs to complete this workshop.
 
   2. VMware player: [https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html](https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html)
 
@@ -102,7 +102,7 @@ This completes the first section. You just created a Node-RED application on IBM
 
 The business service is generated using the so-called LoopBack framework. LoopBack is a highly extensible, open-source Node.js and TypeScript framework based on Express that enables you to quickly create APIs and microservices composed from backend systems such as databases and SOAP or REST services. See the [LoopBack.io](https://loopback.io) site for more information if you want to learn more about this framework.
 
-For our application we use two generators, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service. They are defined in the file `openapi.json` file. For this part of the lab you need to start the virtual image. Once the image is completely up and running, open a terminal session (1). 
+The application uses two generators, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service. The models and controllers are defined in the `openapi.json` file. For remaining part of this lab, you'll need to start the virtual image. Once the image is completely up and running, open a terminal session (1). 
 
 ![](./images/11-build-service-1.png)
 
