@@ -633,7 +633,7 @@ As the business service exposes the transactions as RESTful endpoints, it is rel
 ngrok http 3000
 ```
 
-in a terminal session in your virtual machine. The execution of this command results in a secure tunnel that allows communication (HTTP) from the outside world towards your locahost (the virtual machine) listening on port 3000.
+in a terminal session in your virtual image. The execution of this command results in a secure tunnel that allows communication (HTTP) from the outside world towards your locahost (i.e. in the virtual image) listening on port 3000.
 
 ![](./images/29-connecting-parts-9.png)
 
