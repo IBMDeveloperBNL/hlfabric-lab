@@ -212,10 +212,22 @@ async createProjectPledge(ctx: Context, aidOrg: string, pledgeNumber: string, na
 
     const buffer = Buffer.from(JSON.stringify(pledge));
     await ctx.stub.putState(pledgeId, buffer);
+
+    // define and set pledgeEvent
+    let pledgeEvent = {
+        type: "Create ProjectPledge",
+        pledgeId: pledgeId,
+        name: pledge.name,
+        description: pledge.description,
+        fundsRequired: pledge.fundsRequired,
+        status: pledge.status,
+    };
+
+    await ctx.stub.setEvent('PledgeEvent', Buffer.from(JSON.stringify(pledgeEvent)));        
 }
 ```
 
-The `@Transaction()` method decorator is used to indicate that the function actually transacts on the blockchain. Functions that are only reading from the ledger have the decorator `@Transaction(false)`. Inside the function is checked whether a project pledge with the given pledgeId already exists. If not, a new project pledge asset is constructed based on the values from the input parameters. Finally, the project pledge is converted to a buffer and submitted to the blockchain by calling `ctx.stub.putState`. Now, have a close look at the other functions in `src/my-projectpledge-contract.ts` so that you understand the different transactions involved. 
+The `@Transaction()` method decorator is used to indicate that the function actually transacts on the blockchain. Functions that are only reading from the ledger have the decorator `@Transaction(false)`. Inside the function is checked whether a project pledge with the given pledgeId already exists. If not, a new project pledge asset is constructed based on the values from the input parameters. Next, the project pledge is converted to a buffer and submitted to the blockchain by calling `ctx.stub.putState`. Finally, a `pledgeEvent` object is created and an event is emitted to notify its listeners about the created project pledge. Now, have a close look at the other functions in `src/my-projectpledge-contract.ts` so that you understand the different transactions involved. 
 
 The above transactions are always related to a given project pledge -- the asset. So, in our contract we have one main asset -- which is defined in `src/projectpledge.ts` -- and a supporting funding asset (`src/funding.ts`). Have a close look at both files. You'll see that they are both decorated with the `@Object()` method decorator and that they define the attributes (properties) of the asset.
 
@@ -305,6 +317,37 @@ Now open the `blockchainClient.ts` file in Visual Code. An important function in
         // Get the contract we have installed on the peer
         const contract = await network.getContract('global-citizen');
 
+        await contract.addContractListener('my-contract-listener', 'PledgeEvent', (err:any, event:any, blockNumber:any, transactionId:any, status:any) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+    
+          // Convert event to something we can parse 
+          event = event.payload.toString();
+          event = JSON.parse(event);
+    
+          // Output the PledgeEvent
+          console.log('***************************************************************** Start Pledge Event *****************************************************************');
+          console.log(`type: ${event.type}`);
+          console.log(`pledgeId: ${event.pledgeId}`);
+          console.log(`name: ${event.name}`);
+          console.log(`description: ${event.description}`);
+          console.log(`fundsRequired: ${event.fundsRequired}`);
+          
+          if (event.funds) {
+            console.log(`   fundingType: ${event.funds.fundingType}`);
+            console.log(`   approvedFunding: ${event.funds.approvedFunding}`);
+            console.log(`   totalFundsReceived: ${event.funds.totalFundsReceived}`);
+            console.log(`   fundsPerInstallment: ${event.funds.fundsPerInstallment}`);
+          }
+          
+          console.log(`status: ${event.status}`); 
+          console.log(``);
+          console.log(`Block Number: ${blockNumber} Transaction ID: ${transactionId} Status: ${status}`);
+          console.log('***************************************************************** End Pledge Event *******************************************************************');
+        });
+
         let networkObj = {
           contract: contract,
           network: network
@@ -321,7 +364,7 @@ Now open the `blockchainClient.ts` file in Visual Code. An important function in
     }
 ```
 
-First, a connection is made to the gateway using the admin identity of the network (see line 30 of the code). Next, an instance of the `mychannel` network is retrieved in line 33 and an instance of the contract object is obtained in line 38. Note that in this demo we explicitly look for `global-citizen` as contract name and that this name matches the name of the smart contract that was deployed to the network in [Part 3](#3-build-the-smart-contract) of this pattern. The contract and network are stored in the `networkObj` object, which is specifically created for this purpose. This object is returned to the caller in line 45 of the code. 
+First, a connection is made to the gateway using the admin identity of the network (see line 30 of the code). Next, an instance of the `mychannel` network is retrieved in line 33 and an instance of the contract object is obtained in line 38. Note that in this demo we explicitly look for `global-citizen` as contract name and that this name matches the name of the smart contract that was deployed to the network in [Part 3](#3-build-the-smart-contract) of this pattern. In line 40 of the code a contract listener is added to the contract, which allows us to listen to events emitted from the transactions within the smart contract. This contract listener also provides information like block number and the transaction ID. Finally, in line 71, the contract and network are stored in the `networkObj` object. This object is specifically created for this purpose and is returned to the caller in line 76 of the code. 
 
 In the client, every transaction has its own function. They all have the same layout. A generic input object `args` is expected with mandatory attributes `contract` and `function`. Last but not least, you need to provide the attributes that the transaction expects. As an example, the `createProjectPledge` function is listed below.
 
