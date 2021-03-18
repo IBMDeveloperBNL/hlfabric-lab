@@ -448,7 +448,7 @@ async connectToNetwork() {
 }
 ```
 
-First, a connection is made to the gateway using the admin identity of the network (see line 33 of the code). Next, an instance of the `mychannel` network is retrieved in line 36 and an instance of the contract is obtained in line 42. Note that in this demo we explicitly look for `global-citizen` as contract name and that this name matches the name of the smart contract that was deployed to the network in [Part 3](#3-build-the-smart-contract) of this pattern. In line 44-74 of the code a contract listener is defined, which allows us to listen to contract events emitted from within the smart contract. At line 82 the contract listener is added to the contract. Note that the event also provides information like block number and the transaction ID. A default file checkpointer is used to keep track of last block, and transactions in that block, that has been seen by this client. Finally, in line 85, the contract and network are stored in the `networkObj` object. This object is specifically created for this purpose and is returned to the caller in line 90 of the code. 
+Let's discuss what happens here. First, a connection is made to the gateway using the admin identity of the network (see line 33 of the code). Next, an instance of the `mychannel` network is retrieved in line 36 and an instance of the contract is obtained in line 42. Note that in this demo we explicitly look for `global-citizen` as contract name and that this name matches the name of the smart contract that was deployed to the network in [Part 3](#3-build-the-smart-contract) of this pattern. In line 44-74 of the code a contract listener is defined, which allows us to listen to contract events emitted from within the smart contract. At line 82 the contract listener is added to the contract. Note that the event also provides information like block number and the transaction ID. A default file checkpointer is used to keep track of last block, and transactions in that block, that has been seen by this client. Finally, in line 85, the contract and network are stored in the `networkObj` object. This object is specifically created for this purpose and is returned to the caller in line 90 of the code. 
 
 In the client, every transaction has its own function. They all have the same layout. A generic input object `args` is expected with mandatory attributes `contract` and `function`. Last but not least, you need to provide the attributes that the transaction expects. As an example, the `createProjectPledge` function is listed below.
 
@@ -507,7 +507,7 @@ with the following code:
     }
 ```
 
-You'll probably notice that the `blockchainClient` variable cannot be resolved. This is because there is no `blockchainClient` defined in the controller. To define one, type the following line of code above the class definition in the controller. By typing this line yourself the editor will automatically add the import statement to your code when saving your changes.
+You'll probably notice that the `blockchainClient` variable cannot be resolved. This is because there is no `blockchainClient` defined in the controller. To define one, type the following line of code above the class definition in the controller. By typing this line yourself, the editor will automatically add the import statement to your code when saving your changes.
 
 ```ts
 let blockchainClient = new BlockChainModule.BlockchainClient();
@@ -538,7 +538,7 @@ export class CreateProjectPledgeController {
   :
 ```
 
-and the errors should have disappeared. Make sure your changes to the controller code are saved. Next, repeat this for all other controllers in the folder. Below  the code snippets are listed for each of the controllers.
+and the errors should have disappeared. Make sure your changes to the controller code are saved. Next, repeat these steps for all other controllers in the folder. Below  the code snippets are listed for each of the controllers.
 
 **project-pledge.controller.ts**
 ```ts
@@ -727,7 +727,7 @@ $ npm start
 
 This will fail with the following error message:
 
-![](./images/21-connecting-parts-1.png)
+![](./images/connecting-parts-1.png)
 
 This is because the `blockchainClient` class uses the `fabric-network` module, which is not added as a dependency yet. To fix this error, open the `package.json` file in Visual Code and add the following line to the `devDependencies` section.
 
