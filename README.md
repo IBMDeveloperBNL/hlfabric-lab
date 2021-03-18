@@ -84,7 +84,7 @@ On the 'Configure the DevOps toolchain' page, select the region (1) again that m
 
 As the deployment takes a couple of minutes to complete, you might want to move on to [Part 2](#2-build-the-business-service) to create your business service and return later to complete the setup of the frontend service.
 
-Once the deployment successfully completed and the app is awake, click 'Visit App URL' (1).
+Once the deployment successfully completed (1) and the app is awake, click the App URL (2).
 
 ![](./images/nodered-3.png)
 
