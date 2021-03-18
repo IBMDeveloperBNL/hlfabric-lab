@@ -64,37 +64,49 @@ As you can see in the image, building this application consists of three major s
 ## 1. Build a frontend in Node-RED
 Logon to IBM Cloud using the free account you just created. Next, enter 'Node' as search argument in the search bar (1). In the search results, select the Node-RED App (2).
 
-![](./images/03-nodered-1.png)  
+![](./images/nodered-1.png)  
 
-Ensure your region matches the one assigned to your Lite account and scroll down to give the service a unique name (1). Verify the selected plans are Lite plans and click 'Create' (2) to create the service. 
+Click the 'Get Started' button to continue. Next, provide a unique name (1) for your application and make sure the selected region matches the one assigned to your Lite account. Verify the selected plans are Lite plans and click 'Create' (2) to create the application. 
 
-![](./images/04-nodered-2.png)
+![](./images/nodered-2.png)
 
-The deployment takes a couple of minutes to complete, so you might want to move on to [Part 2](#2-build-the-business-service) to create your business service and return later to complete the setup of the frontend service.
+To actually deploy the created application to the cloud, click the 'Deploy your app' button (1).
+
+![](./images/nodered-9.png)
+
+and select 'Cloud Foundry' as the deployment target. Click 'New' (1) to create a new API key and make sure that the selected region (2) matches the region of your Lite account. Verify that the allocated memory for the application is 256MB and click 'Next' (3).
+
+![](./images/nodered-10.png)
+
+On the 'Configure the DevOps toolchain' page, select the region (1) again that matches your Lite account and click 'Create' (2) to deploy the application to the cloud.
+
+![](./images/nodered-11.png)
+
+As the deployment takes a couple of minutes to complete, you might want to move on to [Part 2](#2-build-the-business-service) to create your business service and return later to complete the setup of the frontend service.
 
 Once the deployment successfully completed and the app is awake, click 'Visit App URL' (1).
 
-![](./images/05-nodered-3.png)
+![](./images/nodered-3.png)
 
 Next, complete the Node-RED initial set-up wizard. Click 'Next' on the first screen and choose a userid/password on the second one to secure your Node-RED environment. Click 'Next' (1) and 'Next' again to go to the final overview page of the wizard. Click 'Finish' to complete the wizard. 
 
-![](./images/06-nodered-4.png)
+![](./images/nodered-4.png)
 
 On the welcome page click on the **Go to your Node-RED flow editor** button.
 
-![](./images/07-nodered-5.png)
+![](./images/nodered-5.png)
 
 Login with your Node-RED credentials (the userid/password you specified in the wizard). You are presented with the drawing canvas, that you'll need to create your Node-RED flows. As we are developing a frontend, we need UI nodes. Unfortunately, these are not present by default so we need to add them. For this, click the menu on the top right (1) and select 'Manage palette' (2).
 
-![](./images/08-nodered-6.png)
+![](./images/nodered-6.png)
 
 Next, click 'Install' (1) and type `dashboard` in the search bar (2). In the search results look for `node-red-dashboard` and click 'Install' (3) to start the installation of the Node-RED dashboard nodes. 
 
-![](./images/09-nodered-7.png)
+![](./images/nodered-7.png)
 
 Once the installation successfully completes, click 'Close' (4) to close the palette. The dashboard nodes are available to you as a separate section on the left-hand side. You might need to scroll down to see them.
 
-![](./images/10-nodered-8.png)
+![](./images/nodered-8.png)
 
 This completes the first section. You just created a Node-RED application on IBM Cloud that will serve as frontend and that is ready to consume some REST services... :+1:
 
@@ -104,7 +116,7 @@ The business service is generated using the so-called LoopBack framework. LoopBa
 
 The application uses two generators, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service. The models and controllers are defined in the `openapi.json` file. For the remaining part of this lab, you'll need to start the virtual image. Once the image is completely up and running, open a terminal session (1). 
 
-![](./images/11-build-service-1.png)
+![](./images/build-service-1.png)
 
 The first step is to change directory to the `Development/blockchain` folder and to clone the `hlfabric-lab-code` git repository. 
 
@@ -139,7 +151,7 @@ Now open a browser session and browse to [http://localhost:3000/explorer](http:/
 
 Try to invoke one of the endpoints, e.g. `/CreateProjectPledge`, by clicking on the service (1). Next, click 'Try it out' (2) and provide some sample values (3). Finally, click 'Execute' (4) to submit the request and to test the service. 
 
-![](./images/12-build-service-2.png)
+![](./images/build-service-2.png)
 
 The response will be a '500 Internal Server Error'. This is by design....:smiley: The current implementation of the service throws exactly this error message.
 
@@ -206,15 +218,15 @@ For this, we will follow the beginner tutorial that is part of the IBM Blockchai
 
 To get started with the tutorial, click on the Visual Code launcher (1) in your virtual image.
 
-![](./images/13-smart-contract-1.png)
+![](./images/smart-contract-1.png)
 
 Next, click the IBM Blockchain extension on the left-hand side (1), followed by the blockchain icon on the top right (2). This opens the IBM Blockchain Platform welcome page. On this page, click the 'Follow tutorials' link (3) to open the tutorials gallery. 
 
-![](./images/14-smart-contract-2.png)
+![](./images/smart-contract-2.png)
 
 Next click the 'Local smart contract development' tutorial. This one takes you through the basics of smart contract development for Fabric. It is highly recommended to complete this tutorial in order to understand the rest of this section.
 
-![](./images/40-smart-contract-10.png)
+![](./images/smart-contract-10.png)
 
 At this point, you should have completed the tutorial and gained some basic knowledge on smart contract development. The next step is to build the smart contract for the tracking donations use case. For this, open a terminal session and change directory to `smart-contract` folder in the `hlfabric-lab-code` repo and run the following commands.
 
@@ -225,7 +237,7 @@ $ npm install
 
 Next, add the `smart-contract` folder to your workspace in Visual Code. Your workspace should look similar to:
 
-![](./images/15-smart-contract-3.png)
+![](./images/smart-contract-3.png)
 
 Now inspect this smart contract project. The structure of it is similar to the one from the tutorial. In this case, there are 2 assets and 5 transactions. The transactions are defined and implemented in the file `src/my-projectpledge-contract.ts`. Take a look at the `createProjectPledge` transaction.
 
@@ -298,29 +310,29 @@ export class Funding {
 
 The last part of this section is to deploy the smart contract to our blockchain network. For this, open the IBM Blockchain extension in your Visual Code editor by clicking the blockchain icon on the left-hand side (1). Next, in the Smart Contract Packages panel, select the Options (2) and click 'Package Open Project' (3).
 
-![](./images/16-smart-contract-4.png)
+![](./images/smart-contract-4.png)
 
 Next, make sure to select the 'V2 channel capabilities' from the drop-down (1).
 
-![](./images/17-smart-contract-5.png)
+![](./images/smart-contract-5.png)
 
 This will result in a `global-citizen@0.0.1` package under the 'Smart Contract Packages' palette. Next, make sure your local fabric is started by checking the 'Fabric Environments' palette. If you see the message '1 Org Local Fabric (click to start)', click that message to start your local blockchain network. 
 
 Once the network is started, click instantiate (1). Make sure the `global-citizen@0.0.1` package is selected when asked which package to select. Hit \<Enter\> to accept the defaults on all other questions asked.
 
-![](./images/39-smart-contract-9.png)
+![](./images/smart-contract-9.png)
 
 The final step in this section is to test whether the smart contract was successfully deployed. For this, click on the contract in the 'Fabric Gateways' panel (expand 1 Org Local Fabric, then click Org1 Gateway -> mychannel -> global-citizen@0.0.1). Now, click the createProjectPledge (1) method. This opens the Transaction View. 
 
-![](./images/18-smart-contract-6.png)
+![](./images/smart-contract-6.png)
 
 Pass the argument string `["aid1","001","test","test desc","100000"]` to the function and hit \<Enter\>. Don't provide any transient data when asked for, just hit \<Enter\> to continue.
 
-![](./images/19-smart-contract-7.png)
+![](./images/smart-contract-7.png)
 
 The transaction should complete successfully. Finally, test whether you can read the new project pledge by evaluating the `readProjectPledge` function. Pass `["aid1:001"]` as pledgeId and check if the response matches the screenshot below.
 
-![](./images/20-smart-contract-8.png)
+![](./images/smart-contract-8.png)
 
 ## 4. Connecting all parts
 
@@ -730,31 +742,31 @@ The service can be accessed on [http://localhost:3000/explorer](http://localhost
 
 We start with the CreateProjectPledgeController. Create a new project pledge using the parameters as shown in the screenshot below. Remember...to get to the form where you can provide the project pledge details, first click the `CreateProjectPledgeController`. Then, click the POST request `CreateProjectPledge` and finally the 'Try it out' button on the right. The POST request should return a 'HTTP 200 OK' response message.
 
-![](./images/22-connecting-parts-2.png)
+![](./images/connecting-parts-2.png)
 
 Next, send this project pledge to the citizen organization for review by invoking the `SendPledgeToGlobalCitizenController` function. If you used the parameters from the screenshot above, you should use `aid2:002` as identifier (pledgeId) for the project pledge.
 
-![](./images/23-connecting-parts-3.png)
+![](./images/connecting-parts-3.png)
 
 Next, send the project pledge to the government organization. Use the same pledgeId as above.
 
-![](./images/24-connecting-parts-4.png)
+![](./images/connecting-parts-4.png)
 
 The government organization can update the project pledge with the total funding approved, the funding type and the fund installment per transfer. To update the project pledge with these details, invoke the controller with the following parameters...
 
-![](./images/25-connecting-parts-5.png)
+![](./images/connecting-parts-5.png)
 
 Finally, start transferring funds by invoking the `TransferFundsController` controller with `aid2:002` as pledgeId.
 
-![](./images/26-connecting-parts-6.png)
+![](./images/connecting-parts-6.png)
 
 Now, query the project pledge by invoking the `ProjectPledgeController` controller. Use the same pledgeId as above. 
 
-![](./images/27-connecting-parts-7.png)
+![](./images/connecting-parts-7.png)
 
 You should see an output similar to:
 
-![](./images/28-connecting-parts-8.png)
+![](./images/connecting-parts-8.png)
 
 Note the funds object that is part of the project pledge now. If you invoke `transferFunds` again, followed by the above project pledge query, you should see an increase of the `totalFundsReceived` attribute.
 
@@ -768,11 +780,11 @@ $ ngrok http 3000
 
 in a terminal session in your virtual image. The execution of this command results in a secure tunnel that allows communication (HTTP) from the outside world towards your locahost (i.e. in the virtual image) listening on port 3000.
 
-![](./images/29-connecting-parts-9.png)
+![](./images/connecting-parts-9.png)
 
 The result should be similar to:
 
-![](./images/30-connecting-parts-10.png)
+![](./images/connecting-parts-10.png)
 
 At this point your running business service should also be accessible via the URL above (1). Try this with your own URL in a browser to verify whether this holds for you as well.
 
@@ -780,34 +792,34 @@ To show that the frontend can connect to the business service, open a new tab in
 
 From the node pallet drag the inject node (1) and the debug node (2) to the canvas. 
 
-![](./images/31-connecting-parts-11.png)
+![](./images/connecting-parts-11.png)
 
 Now scroll down in the node pallet till you see the 'network' section and drag the HTTP request node (1) onto the canvas as well. Connect the three nodes together as shown at (2) in the screenshot below. 
 
-![](./images/32-connecting-parts-12.png)
+![](./images/connecting-parts-12.png)
 
 Next, double-click the 'http request' node and fill in the URL (1) as shown below. Replace the secure base URL with your secure ngrok URL and click 'Done' (2). Finally, click 'Deploy' (3) to deploy the flow. 
 
-![](./images/33-connecting-parts-13.png)
+![](./images/connecting-parts-13.png)
 
 To test the flow, click the small box (1) left from the timestamp inspect node. Click the debug tab on the right to see the result. This should be a string representing the project pledge with pledgeId `aid2:002`.
 
-![](./images/34-connecting-parts-14.png)
+![](./images/connecting-parts-14.png)
 
 Congratulations!! :clap: :+1: You successfull integrated the three components of the application!! The frontend (Node-RED) invokes via a REST call the business service. The business service uses the Hyperledger Fabric Node.js SDK to invoke a transaction of the smart contract, which in its turn transacts with the blockchain network.
 
 ### Build a basic dashboard to create project pledges
 Okay, agreed, this still is a very minimalistic UI...Therefore, let's extend it a bit and create a web UI that can be used to create new project pledges. For this, click the menu (1) on the top-right and select Import (2).
 
-![](./images/35-connecting-parts-15.png)
+![](./images/connecting-parts-15.png)
 
 Next, click 'select a file to import' (1) and browse to the `frontend` folder of the `hlfabric-lab-code` repo. Select the file `create-project-pledge.json` and click 'Open'. Next, make sure 'new flow' (2) is selected. This will import the flow as a new flow in a separate tab. Finally, click Import (3) to complete the import.
 
-![](./images/36-connecting-parts-16.png)
+![](./images/connecting-parts-16.png)
 
 The result should be similar to:
 
-![](./images/37-connecting-parts-17.png)
+![](./images/connecting-parts-17.png)
 
 Double-click on both HTTP request nodes and make sure the base URL (https://<something>.ngrok.io) points to your secure ngrok URL. Finally, click 'Deploy' (1) to deploy the flow. You can now test the dashboard by going to the same base URL as your Node-RED application only suffixed with `/ui` instead of `/red`. So the URL for the dashboard should look like:
 
@@ -817,7 +829,7 @@ http://<node-red-base-url>/ui
 
 The result should be similar to: 
 
-![](./images/38-connecting-parts-18.png)
+![](./images/connecting-parts-18.png)
 
 **CONGRATULATIONS!!** :smiley: :+1: 
 
