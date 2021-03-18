@@ -752,7 +752,8 @@ $ npm install
 $ node enrollAdmin.js
 ```
 
-Congratulations!! :+1: We can now start to test the connected business service by running `npm start` in the root folder of your project.
+Congratulations!! :+1: 
+We can now start to test the connected business service by running `npm start` in the root folder of your project.
 
 ```bash
 $ cd ~/Development/blockchain/my-bc-app
