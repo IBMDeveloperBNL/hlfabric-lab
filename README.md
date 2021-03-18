@@ -62,7 +62,7 @@ As you can see in the image, building this application consists of three major s
 4. [Connecting all parts](#4-connecting-all-parts)
 
 ## 1. Build a frontend in Node-RED
-Logon to IBM Cloud using the free account you just created. Next, enter 'Node' as search argument in the search bar (1). In the search results, select the Node-RED Starter kit (2).
+Logon to IBM Cloud using the free account you just created. Next, enter 'Node' as search argument in the search bar (1). In the search results, select the Node-RED App (2).
 
 ![](./images/03-nodered-1.png)  
 
