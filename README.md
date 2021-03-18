@@ -240,7 +240,7 @@ Next, add the `smart-contract` folder to your workspace in Visual Code. Your wor
 
 ![](./images/smart-contract-3.png)
 
-Now inspect this smart contract project. The structure of it is similar to the one from the tutorial. In this case, there are 2 assets and 5 transactions. The transactions are defined and implemented in the file `src/my-projectpledge-contract.ts`. Take a look at the `createProjectPledge` transaction.
+Now, inspect this smart contract project. The structure of it is similar to the one from the tutorial. In this case, there are 2 assets and 5 transactions. The transactions are defined and implemented in the file `src/my-projectpledge-contract.ts`. Take a look at the `createProjectPledge` transaction.
 
 ```ts
 @Transaction()
@@ -279,7 +279,7 @@ async createProjectPledge(ctx: Context, aidOrg: string, pledgeNumber: string, na
 }
 ```
 
-The `@Transaction()` method decorator is used to indicate that the function actually transacts on the blockchain. Functions that are only reading from the ledger have the decorator `@Transaction(false)`. Inside the function is checked whether a project pledge with the given pledgeId already exists. If not, a new project pledge asset is constructed based on the values from the input parameters. Next, the project pledge is converted to a buffer and submitted to the blockchain by calling `ctx.stub.putState`. Finally, a `pledgeEvent` object is created and an event is emitted to notify its listeners about the created project pledge. Now, have a close look at the other functions in `src/my-projectpledge-contract.ts` so that you understand the different transactions involved. 
+The `@Transaction()` method decorator is used to indicate that the function actually transacts on the blockchain. Functions that are only reading from the ledger have the decorator `@Transaction(false)`. Inside the function is checked whether a project pledge with the given pledgeId already exists. If not, a new project pledge asset is created based on the values from the input parameters. Next, the project pledge is converted to a buffer and submitted to the blockchain by calling `ctx.stub.putState`. Finally, a `pledgeEvent` object is created and an event is emitted to notify its listeners about the created project pledge. Now, have a close look at the other functions in `src/my-projectpledge-contract.ts` so that you understand the different transactions involved. 
 
 The above transactions are always related to a given project pledge -- the asset. So, in our contract we have one main asset -- which is defined in `src/projectpledge.ts` -- and a supporting funding asset (`src/funding.ts`). Have a close look at both files. You'll see that they are both decorated with the `@Object()` method decorator and that they define the attributes (properties) of the asset.
 
@@ -309,7 +309,7 @@ export class Funding {
 
 ```
 
-The last part of this section is to deploy the smart contract to our blockchain network. For this, open the IBM Blockchain extension in your Visual Code editor by clicking the blockchain icon on the left-hand side (1). Next, in the Smart Contract Packages panel, select the Options (2) and click 'Package Open Project' (3).
+The last part of this section is to deploy the smart contract to our blockchain network. For this, open the IBM Blockchain extension in your Visual Code editor by clicking the blockchain icon on the left-hand side (1). Next, in the Smart Contracts panel, select the Options (2) and click 'Package Open Project' (3).
 
 ![](./images/smart-contract-4.png)
 
@@ -317,7 +317,7 @@ Next, make sure to select the 'V2 channel capabilities' from the drop-down (1).
 
 ![](./images/smart-contract-5.png)
 
-This will result in a `global-citizen@0.0.1` package under the 'Smart Contract Packages' palette. Next, make sure your local fabric is started by checking the 'Fabric Environments' palette. If you see the message '1 Org Local Fabric (click to start)', click that message to start your local blockchain network. 
+This results in a `global-citizen@0.0.1` package under the 'Smart Contracts' palette. Next, make sure your local fabric is started by checking the 'Fabric Environments' palette. If you see the message '1 Org Local Fabric (click to start)', click that message to start your local blockchain network. 
 
 Once the network is started, click instantiate (1). Make sure the `global-citizen@0.0.1` package is selected when asked which package to select. Hit \<Enter\> to accept the defaults on all other questions asked.
 
