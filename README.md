@@ -102,37 +102,37 @@ This completes the first section. You just created a Node-RED application on IBM
 
 The business service is generated using the so-called LoopBack framework. LoopBack is a highly extensible, open-source Node.js and TypeScript framework based on Express that enables you to quickly create APIs and microservices composed from backend systems such as databases and SOAP or REST services. See the [LoopBack.io](https://loopback.io) site for more information if you want to learn more about this framework.
 
-The application uses two generators, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service. The models and controllers are defined in the `openapi.json` file. For remaining part of this lab, you'll need to start the virtual image. Once the image is completely up and running, open a terminal session (1). 
+The application uses two generators, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service. The models and controllers are defined in the `openapi.json` file. For the remaining part of this lab, you'll need to start the virtual image. Once the image is completely up and running, open a terminal session (1). 
 
 ![](./images/11-build-service-1.png)
 
 The first step is to change directory to the `Development/blockchain` folder and to clone the `hlfabric-lab-code` git repository. 
 
-```
-cd ~/Development/blockchain
-git clone https://github.com/IBMDeveloperBNL/hlfabric-lab-code
-```
-
-This will download the necessary code snippets to your virtual image. Next, in the terminal session, make sure the current directory is the `Development/blockchain` folder and type:
-
-```
-lb4 my-bc-app
+```bash
+$ cd ~/Development/blockchain
+$ git clone https://github.com/IBMDeveloperBNL/hlfabric-lab-code
 ```
 
-This invokes the application generator, which generates a basic LoopBack application with the name `my-bc-app`. Hit \<Enter\> on all questions asked to accept the default values. Once the application has been generated, change directory to the `my-bc-app` folder and invoke the OpenAPI generator to complete the set-up of your business service.
+This will download the necessary code snippets to your virtual image. Next, in the terminal session, make sure the current folder is the `Development/blockchain` folder and type:
 
-```
-cd ~/Development/blockchain/my-bc-app
-lb4 openapi --url ../hlfabric-lab-code/business-service/openapi.json --validate true
+```bash
+$ lb4 my-bc-app
 ```
 
-Again, hit \<Enter\> to accept the defaults. The `lb4` command with the `openapi` option generates the necessary models and controllers as defined in the file `openapi.json`. Browse to the `business-service` subfolder of `hlfabric-code` to manually inspect the JSON file. You'll see definitions for the `ProjectPledge` asset as well as for transactions like `createProjectPledge` and `transferFunds`.
+This invokes the application generator, which generates a basic LoopBack application with the name `my-bc-app`. Hit \<Enter\> on all questions to accept the default values. Once the application has been generated, change directory to the `my-bc-app` folder and invoke the OpenAPI generator to complete the set-up of your business service.
+
+```bash
+$ cd ~/Development/blockchain/my-bc-app
+$ lb4 openapi --url ../hlfabric-lab-code/business-service/openapi.json --validate true
+```
+
+Again, hit \<Enter\> to accept the defaults. The `lb4` command with the `openapi` option generates the necessary models and controllers as defined in the file `openapi.json`. Browse to the `business-service` subfolder of `hlfabric-lab-code` to manually inspect the JSON file. You'll see definitions for the `ProjectPledge` asset as well as for transactions like `createProjectPledge` and `transferFunds`.
 
 Finally, the skeleton for the business service can be tested by typing `npm start` (current directory should be `my-bc-app`).
 
-```
-cd ~/Development/blockchain/my-bc-app
-npm start
+```bash
+$ cd ~/Development/blockchain/my-bc-app
+$ npm start
 ```
 
 Now open a browser session and browse to [http://localhost:3000/explorer](http://localhost:3000/explorer). This gives an overview of all available REST endpoints of our business service. 
@@ -145,13 +145,52 @@ The response will be a '500 Internal Server Error'. This is by design....:smiley
 
 ```ts
 export class CreateProjectPledgeController {
-  constructor() {}
-  /*
-   * @param _requestBody 
+  constructor() { }
+
+  /**
+   *
+   *
+   * @param _requestBody
    * @returns ResponseMessage model instance
    */
-  @operation('post', '/CreateProjectPledge')
-  async createProjectPledgeCreate(@requestBody() _requestBody: CreateProjectPledge): Promise<ResponseMessage> {
+  @operation('post', '/CreateProjectPledge', {
+    'x-controller-name': 'CreateProjectPledgeController',
+    'x-operation-name': 'createProjectPledgeCreate',
+    tags: [
+      'CreateProjectPledgeController',
+    ],
+    responses: {
+      '200': {
+        description: 'ResponseMessage model instance',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/ResponseMessage',
+            },
+          },
+        },
+      },
+    },
+    requestBody: {
+      content: {
+        'application/json': {
+          schema: {
+            $ref: '#/components/schemas/CreateProjectPledge',
+          },
+        },
+      },
+    },
+    operationId: 'CreateProjectPledgeController.createProjectPledgeCreate',
+  })
+  async createProjectPledgeCreate(@requestBody({
+    content: {
+      'application/json': {
+        schema: {
+          $ref: '#/components/schemas/CreateProjectPledge',
+        },
+      },
+    },
+  }) _requestBody: CreateProjectPledge): Promise<ResponseMessage> {
     throw new Error('Not implemented');
   }
 }
@@ -165,7 +204,7 @@ Typically, business rules that need to be executed --- before a transaction can 
 
 For this, we will follow the beginner tutorial that is part of the IBM Blockchain extension in Visual Code. After you completed the tutorial you should have a better understanding of how to develop and debug smart contracts, as well as of how to deploy them to your local HyperLedger Fabric network. The IBM blockchain extension itself is built to provide developers an integrated workflow for building blockchain applictions. 
 
-To get started with the tutorial, click on the Visual Code launcher (1) in your VirtualBox image.
+To get started with the tutorial, click on the Visual Code launcher (1) in your virtual image.
 
 ![](./images/13-smart-contract-1.png)
 
@@ -179,9 +218,9 @@ Next click the 'Local smart contract development' tutorial. This one takes you t
 
 At this point, you should have completed the tutorial and gained some basic knowledge on smart contract development. The next step is to build the smart contract for the tracking donations use case. For this, open a terminal session and change directory to `smart-contract` folder in the `hlfabric-lab-code` repo and run the following commands.
 
-```
-cd ~/Development/blockchain/hlfabric-lab-code/smart-contract
-npm install
+```bash
+$ cd ~/Development/blockchain/hlfabric-lab-code/smart-contract
+$ npm install
 ```
 
 Next, add the `smart-contract` folder to your workspace in Visual Code. Your workspace should look similar to:
@@ -193,15 +232,15 @@ Now inspect this smart contract project. The structure of it is similar to the o
 ```ts
 @Transaction()
 async createProjectPledge(ctx: Context, aidOrg: string, pledgeNumber: string, name: string, description: string, fundsRequired: number): Promise<void> {
-    const pledgeId = aidOrg + ':' + pledgeNumber;
-    const exists = await this.projectPledgeExists(ctx, pledgeId);
+    const pledgeId: string = aidOrg + ':' + pledgeNumber;
+    const exists: boolean = await this.projectPledgeExists(ctx, pledgeId);
 
     if (exists) {
         throw new Error(`The project pledge ${pledgeId} already exists`);
     }
 
     // create an instance of the project pledge
-    let pledge = new ProjectPledge();
+    let pledge: ProjectPledge = new ProjectPledge();
 
     pledge.pledgeNumber = pledgeNumber;
     pledge.aidOrg = aidOrg;
@@ -210,7 +249,7 @@ async createProjectPledge(ctx: Context, aidOrg: string, pledgeNumber: string, na
     pledge.fundsRequired = fundsRequired;
     pledge.status = ppState.INITIALSTATE;
 
-    const buffer = Buffer.from(JSON.stringify(pledge));
+    const buffer: Buffer = Buffer.from(JSON.stringify(pledge));
     await ctx.stub.putState(pledgeId, buffer);
 
     // define and set pledgeEvent
@@ -261,17 +300,17 @@ The last part of this section is to deploy the smart contract to our blockchain 
 
 ![](./images/16-smart-contract-4.png)
 
-Next, choose your `smart-contract` folder as workspace folder to package (1). 
+Next, make sure to select the 'V2 channel capabilities' from the drop-down (1).
 
 ![](./images/17-smart-contract-5.png)
 
-This will result in a `global-citizen@0.0.1` package under the 'Smart Contract Packages' palette. Next, make sure your local fabric is started by checking the 'Local Fabric Ops' palette. If you see the message 'Local Fabric (click to start)', click that message to start your local blockchain network. 
+This will result in a `global-citizen@0.0.1` package under the 'Smart Contract Packages' palette. Next, make sure your local fabric is started by checking the 'Fabric Environments' palette. If you see the message '1 Org Local Fabric (click to start)', click that message to start your local blockchain network. 
 
 Once the network is started, click instantiate (1). Make sure the `global-citizen@0.0.1` package is selected when asked which package to select. Hit \<Enter\> to accept the defaults on all other questions asked.
 
 ![](./images/39-smart-contract-9.png)
 
-The final step in this section is to test whether the smart contract was successfully deployed. For this, click on the contract in the Fabric Gateways panel (expand Local Fabric, then click mychannel -> global-citizen@0.0.1). Now, select the createProjectPledge (1) method and right-click this method to select 'Submit Transaction' (2).
+The final step in this section is to test whether the smart contract was successfully deployed. For this, click on the contract in the 'Fabric Gateways' panel (expand 1 Org Local Fabric, then click Org1 Gateway -> mychannel -> global-citizen@0.0.1). Now, click the createProjectPledge (1) method. This opens the Transaction View. 
 
 ![](./images/18-smart-contract-6.png)
 
@@ -289,95 +328,106 @@ The transaction should complete successfully. Finally, test whether you can read
 
 The business service communicates with the smart contract via the Hyperledger Fabric Node.js SDK. We concentrated all communication with the blockchain network in the file `blockchainClient.ts`. To include this file in your project, copy it from the `hlfabric-lab-code` repo to the `src` folder of your business service.
 
-```
-cd ~/Development/blockchain
-cp ./hlfabric-lab-code/business-service/src/blockchainClient.ts ./my-bc-app/src
+```bash
+$ cd ~/Development/blockchain
+$ cp ./hlfabric-lab-code/business-service/src/blockchainClient.ts ./my-bc-app/src
 ```
 
 Next, move the `local_fabric` folder from the `hlfabric-lab-code` repo to the root folder of your business service. This folder contains the connection information to your local Hyperledger Fabric network, as well as some JavaScript files to enroll an admin user and a normal user.
 
-```
-cd ~/Development/blockchain
-mv ./hlfabric-lab-code/business-service/local_fabric ./my-bc-app
+```bash
+$ cd ~/Development/blockchain
+$ mv ./hlfabric-lab-code/business-service/local_fabric ./my-bc-app
 ```
 
 Now open the `blockchainClient.ts` file in Visual Code. An important function in this class is the function `connectToNetwork()`.
 
 ```ts
-    async connectToNetwork() {
+async connectToNetwork() {
+  try {
+    // A wallet stores a collection of identities for use
+    const wallet: Wallet = await Wallets.newFileSystemWallet('./local_fabric/wallet');
 
-      try {
-        await gateway.connect(ccp, { wallet, identity: appAdmin, discovery: gatewayDiscovery });
+    await gateway.connect(ccp, {wallet, identity: appAdmin, discovery: gatewayDiscovery});
 
-        // Connect to our local fabric
-        const network = await gateway.getNetwork('mychannel');
+    // Connect to our local fabric
+    const network: Network = await gateway.getNetwork('mychannel');
 
-        console.log('Connected to mychannel. ');
+    console.log('**********************************************************************************************************');
+    console.log('--> connecting to channel: ' + CHANNEL);
 
-        // Get the contract we have installed on the peer
-        const contract = await network.getContract('global-citizen');
+    // Get the contract we have installed on the peer
+    const contract: Contract = network.getContract(CONTRACT);
 
-        await contract.addContractListener('my-contract-listener', 'PledgeEvent', (err:any, event:any, blockNumber:any, transactionId:any, status:any) => {
-          if (err) {
-            console.error(err);
-            return;
-          }
-    
-          // Convert event to something we can parse 
-          event = event.payload.toString();
-          event = JSON.parse(event);
-    
+    const listener: ContractListener = async (event: ContractEvent) => {
+      if (event.eventName === 'PledgeEvent') {
+        if (event.payload) {
+          const eventPayload = JSON.parse(event.payload.toString('utf8'));
+          const eventTransaction: TransactionEvent = event.getTransactionEvent();
+          const eventBlock: BlockEvent = eventTransaction.getBlockEvent();
+
           // Output the PledgeEvent
-          console.log('***************************************************************** Start Pledge Event *****************************************************************');
-          console.log(`type: ${event.type}`);
-          console.log(`pledgeId: ${event.pledgeId}`);
-          console.log(`name: ${event.name}`);
-          console.log(`description: ${event.description}`);
-          console.log(`fundsRequired: ${event.fundsRequired}`);
-          
-          if (event.funds) {
-            console.log(`   fundingType: ${event.funds.fundingType}`);
-            console.log(`   approvedFunding: ${event.funds.approvedFunding}`);
-            console.log(`   totalFundsReceived: ${event.funds.totalFundsReceived}`);
-            console.log(`   fundsPerInstallment: ${event.funds.fundsPerInstallment}`);
+          console.log('\n--> ******** received pledge event ********');
+          console.log(`-->    type: ${eventPayload.type}`);
+          console.log(`-->    pledgeId: ${eventPayload.pledgeId}`);
+          console.log(`-->    name: ${eventPayload.name}`);
+          console.log(`-->    description: ${eventPayload.description}`);
+          console.log(`-->    fundsRequired: ${eventPayload.fundsRequired}`);
+
+          if (eventPayload.funds) {
+            console.log(`-->       fundingType: ${eventPayload.funds.fundingType}`);
+            console.log(`-->       approvedFunding: ${eventPayload.funds.approvedFunding}`);
+            console.log(`-->       totalFundsReceived: ${eventPayload.funds.totalFundsReceived}`);
+            console.log(`-->       fundsPerInstallment: ${eventPayload.funds.fundsPerInstallment}`);
           }
-          
-          console.log(`status: ${event.status}`); 
-          console.log(``);
-          console.log(`Block Number: ${blockNumber} Transaction ID: ${transactionId} Status: ${status}`);
-          console.log('***************************************************************** End Pledge Event *******************************************************************');
-        });
 
-        let networkObj = {
-          contract: contract,
-          network: network
-        };
-
-        return networkObj;
-
-      } catch (error) {
-        console.log(`Error processing transaction. ${error}`);
-        console.log(error.stack);
-
-        return error;
+          console.log(`-->    pledge status: ${eventPayload.status}`);
+          console.log(`--> `);
+          console.log(`-->    block number: ${eventBlock.blockNumber}`);
+          console.log(`-->    transaction ID: ${eventTransaction.transactionId}`);
+          console.log(`-->    transaction status: ${eventTransaction.status}`);
+          console.log('--> ******** processed pledge event ********\n');
+        }
       }
+    };
+
+    // Define file based checkpointer to keep track of last block and transactions in that block, that have been seen by this client.
+    const options: ListenerOptions = {
+      checkpointer: await DefaultCheckpointers.file('./checkpoint.json')
     }
+
+    // Add the listener defined above to the contract so that it can receive smart contract events emitted by the chaincode
+    await contract.addContractListener(listener, options);
+
+    // Define network object that contains both the contract and the network object
+    const networkObj = {
+      contract: contract,
+      network: network
+    };
+
+    return networkObj;
+  } catch (error) {
+    console.log(`Error processing transaction. ${error}`);
+    console.log(error.stack);
+
+    return error;
+  }
+}
 ```
 
-First, a connection is made to the gateway using the admin identity of the network (see line 30 of the code). Next, an instance of the `mychannel` network is retrieved in line 33 and an instance of the contract object is obtained in line 38. Note that in this demo we explicitly look for `global-citizen` as contract name and that this name matches the name of the smart contract that was deployed to the network in [Part 3](#3-build-the-smart-contract) of this pattern. In line 40 of the code a contract listener is added to the contract, which allows us to listen to events emitted from the transactions within the smart contract. This contract listener also provides information like block number and the transaction ID. Finally, in line 71, the contract and network are stored in the `networkObj` object. This object is specifically created for this purpose and is returned to the caller in line 76 of the code. 
+First, a connection is made to the gateway using the admin identity of the network (see line 33 of the code). Next, an instance of the `mychannel` network is retrieved in line 36 and an instance of the contract is obtained in line 42. Note that in this demo we explicitly look for `global-citizen` as contract name and that this name matches the name of the smart contract that was deployed to the network in [Part 3](#3-build-the-smart-contract) of this pattern. In line 44-74 of the code a contract listener is defined, which allows us to listen to contract events emitted from within the smart contract. At line 82 the contract listener is added to the contract. Note that the event also provides information like block number and the transaction ID. A default file checkpointer is used to keep track of last block, and transactions in that block, that has been seen by this client. Finally, in line 85, the contract and network are stored in the `networkObj` object. This object is specifically created for this purpose and is returned to the caller in line 90 of the code. 
 
 In the client, every transaction has its own function. They all have the same layout. A generic input object `args` is expected with mandatory attributes `contract` and `function`. Last but not least, you need to provide the attributes that the transaction expects. As an example, the `createProjectPledge` function is listed below.
 
 ```ts
-    async createProjectPledge(args: any) {
-      // Calling transaction1 transaction in the smart contract
-      let response = await args.contract.submitTransaction(args.function, args.aidOrg, args.pledgeNumber, args.name, args.desc, args.fundsRequired);
-
-      return response;
-    }
+async createProjectPledge(args: any) {
+  // Calling createProjectPledge transaction in the smart contract
+  console.log('--> invoking createProjectPledge(ctx, "' + args.aidOrg + '", "' + args.pledgeNumber + '", "' + args.name + '", "' + args.desc + '", "' + args.fundsRequired + '")');
+  return await args.contract.submitTransaction(args.function, args.aidOrg, args.pledgeNumber, args.name, args.desc, args.fundsRequired);
+}
 ```
 
-Now all transactions can be invoked via the client, it is time to implement the controller logic. For this, add the `my-bc-app` folder to your workspace in Visual Code and expand the `src/controllers` folder. Double-click the first controller `create-project-pledge.controller.ts` in the list. Now replace line 23
+Now all transactions can be invoked via the client, it is time to implement the controller logic. For this, add the `my-bc-app` folder to your workspace in Visual Code and expand the `src/controllers` folder. Double-click the first controller `create-project-pledge.controller.ts` in the list. Now replace line 230
 
 ```ts
 throw new Error('Not implemented');
@@ -386,11 +436,12 @@ throw new Error('Not implemented');
 with the following code:
 
 ```ts
-     try {
+    try {
       let networkObj = await blockchainClient.connectToNetwork();
 
       if (networkObj && !(networkObj.stack)) {
-        // Construct data object that serves as
+        // Construc the input object with right function to call, the necessary
+        // parameters and the created contract from the blockchainClient class
         let inputObj = {
           function: 'createProjectPledge',
           contract: networkObj.contract,
@@ -407,42 +458,49 @@ with the following code:
         throw new Error(networkObj.message);
       }
 
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'added project pledge' });
+      let responseMessage: ResponseMessage = new ResponseMessage({message: 'added project pledge'});
       return responseMessage;
 
     } catch (error) {
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: error, statusCode: '400' });
+      let responseMessage: ResponseMessage = new ResponseMessage({message: error, statusCode: '400'});
       return responseMessage;
     } finally {
+      // Workaround for error @grpc/grpc-js: Closing Stream After Unary Call Triggers Double Free
+      // For more info: https://github.com/grpc/grpc-node/issues/1464
+      await new Promise(resolve => setTimeout(resolve, 0));
+
+      // Properly disconnecting from the network
       blockchainClient.disconnectFromNetwork();
     }
 ```
 
-You'll probably notice that the `blockchainClient` variable cannot be resolved. This is because there is no `blockchainClient` defined in the controller. To define one, type the following line of code above the class definition in the controller.
+You'll probably notice that the `blockchainClient` variable cannot be resolved. This is because there is no `blockchainClient` defined in the controller. To define one, type the following line of code above the class definition in the controller. By typing this line yourself the editor will automatically add the import statement to your code when saving your changes.
 
 ```ts
 let blockchainClient = new BlockChainModule.BlockchainClient();
 ```
 
-The code should now look like:
+The code should now look similar to:
 
 ```ts
-/* tslint:disable:no-any */
-import { operation, param, requestBody } from '@loopback/rest';
-import { CreateProjectPledge } from '../models/create-project-pledge.model';
-import { ResponseMessage } from '../models/response-message.model';
-import { BlockChainModule } from '../blockchainClient';
+import {api, operation, requestBody} from '@loopback/rest';
+import {BlockChainModule} from '../blockchainClient';
+import {CreateProjectPledge} from '../models/create-project-pledge.model';
+import {ResponseMessage} from '../models/response-message.model';
 
 let blockchainClient = new BlockChainModule.BlockchainClient();
 
 /**
  * The controller class is generated from OpenAPI spec with operations tagged
- * by CreateProjectPledgeController
+ * by CreateProjectPledgeController.
  *
  */
+@api({
+  :
+  :
+})
 export class CreateProjectPledgeController {
   constructor() { }
-
   :
   :
 ```
@@ -455,21 +513,28 @@ and the errors should have disappeared. Make sure your changes to the controller
       let networkObj = await blockchainClient.connectToNetwork();
 
       if (networkObj && !(networkObj.stack)) {
+        // Construc the input object with right function to call, the necessary
+        // parameters and the created contract from the blockchainClient class
         let inputObj = {
           function: 'readProjectPledge',
           contract: networkObj.contract,
           id: id
         };
 
-        return await blockchainClient.queryProject(inputObj);
+        const response: any = await blockchainClient.queryProject(inputObj);
+        return response;
       } else {
         // Couldn't connect to network, so passing this object on to catch clause...
         throw new Error(networkObj.message);
       }
-
     } catch (error) {
       return error;
     } finally {
+      // Workaround for error @grpc/grpc-js: Closing Stream After Unary Call Triggers Double Free
+      // For more info: https://github.com/grpc/grpc-node/issues/1464
+      await new Promise(resolve => setTimeout(resolve, 0));
+
+      // Properly disconnecting from the network
       blockchainClient.disconnectFromNetwork();
     }
 ```
@@ -480,7 +545,8 @@ and the errors should have disappeared. Make sure your changes to the controller
       let networkObj = await blockchainClient.connectToNetwork();
 
       if (networkObj && !(networkObj.stack)) {
-        // Construct data object that serves as
+        // Construc the input object with right function to call, the necessary
+        // parameters and the created contract from the blockchainClient class
         let inputObj = {
           function: 'sendPledgeToGlobalCitizen',
           contract: networkObj.contract,
@@ -493,13 +559,18 @@ and the errors should have disappeared. Make sure your changes to the controller
         throw new Error(networkObj.message);
       }
 
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'Sent project pledge ' + _requestBody.pledgeId + ' to citizen org for review...' });
+      let responseMessage: ResponseMessage = new ResponseMessage({message: 'Sent project pledge ' + _requestBody.pledgeId + ' to citizen org for review...'});
       return responseMessage;
 
     } catch (error) {
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: error, statusCode: '400' });
+      let responseMessage: ResponseMessage = new ResponseMessage({message: error, statusCode: '400'});
       return responseMessage;
     } finally {
+      // Workaround for error @grpc/grpc-js: Closing Stream After Unary Call Triggers Double Free
+      // For more info: https://github.com/grpc/grpc-node/issues/1464
+      await new Promise(resolve => setTimeout(resolve, 0));
+
+      // Properly disconnecting from the network
       blockchainClient.disconnectFromNetwork();
     }
 ```
@@ -510,7 +581,8 @@ and the errors should have disappeared. Make sure your changes to the controller
       let networkObj = await blockchainClient.connectToNetwork();
 
       if (networkObj && !(networkObj.stack)) {
-        // Construct data object that serves as
+        // Construc the input object with right function to call, the necessary
+        // parameters and the created contract from the blockchainClient class
         let inputObj = {
           function: 'sendPledgeToGovOrg',
           contract: networkObj.contract,
@@ -523,13 +595,18 @@ and the errors should have disappeared. Make sure your changes to the controller
         throw new Error(networkObj.message);
       }
 
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'Sent project pledge ' + _requestBody.pledgeId + ' to government org for review...' });
+      let responseMessage: ResponseMessage = new ResponseMessage({message: 'Sent project pledge ' + _requestBody.pledgeId + ' to government org for review...'});
       return responseMessage;
 
     } catch (error) {
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: error, statusCode: '400' });
+      let responseMessage: ResponseMessage = new ResponseMessage({message: error, statusCode: '400'});
       return responseMessage;
     } finally {
+      // Workaround for error @grpc/grpc-js: Closing Stream After Unary Call Triggers Double Free
+      // For more info: https://github.com/grpc/grpc-node/issues/1464
+      await new Promise(resolve => setTimeout(resolve, 0));
+
+      // Properly disconnecting from the network
       blockchainClient.disconnectFromNetwork();
     }
 ```
@@ -540,7 +617,8 @@ and the errors should have disappeared. Make sure your changes to the controller
       let networkObj = await blockchainClient.connectToNetwork();
 
       if (networkObj && !(networkObj.stack)) {
-        // Construct data object that serves as
+        // Construc the input object with right function to call, the necessary
+        // parameters and the created contract from the blockchainClient class
         let inputObj = {
           function: 'transferFunds',
           contract: networkObj.contract,
@@ -553,13 +631,18 @@ and the errors should have disappeared. Make sure your changes to the controller
         throw new Error(networkObj.message);
       }
 
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'Total funds received incremented for project pledge ' + _requestBody.pledgeId });
+      let responseMessage: ResponseMessage = new ResponseMessage({message: 'Total funds received incremented for project pledge ' + _requestBody.pledgeId});
       return responseMessage;
 
     } catch (error) {
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: error, statusCode: '400' });
+      let responseMessage: ResponseMessage = new ResponseMessage({message: error, statusCode: '400'});
       return responseMessage;
     } finally {
+      // Workaround for error @grpc/grpc-js: Closing Stream After Unary Call Triggers Double Free
+      // For more info: https://github.com/grpc/grpc-node/issues/1464
+      await new Promise(resolve => setTimeout(resolve, 0));
+
+      // Properly disconnecting from the network
       blockchainClient.disconnectFromNetwork();
     }
 ```
@@ -570,7 +653,8 @@ and the errors should have disappeared. Make sure your changes to the controller
       let networkObj = await blockchainClient.connectToNetwork();
 
       if (networkObj && !(networkObj.stack)) {
-        // Construct data object that serves as
+        // Construc the input object with right function to call, the necessary
+        // parameters and the created contract from the blockchainClient class
         let inputObj = {
           function: 'updatePledge',
           contract: networkObj.contract,
@@ -586,21 +670,26 @@ and the errors should have disappeared. Make sure your changes to the controller
         throw new Error(networkObj.message);
       }
 
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: 'Updated project pledge ' + _requestBody.pledgeId });
+      let responseMessage: ResponseMessage = new ResponseMessage({message: 'Updated project pledge ' + _requestBody.pledgeId});
       return responseMessage;
 
     } catch (error) {
-      let responseMessage: ResponseMessage = new ResponseMessage({ message: error.message, statusCode: '400' });
+      let responseMessage: ResponseMessage = new ResponseMessage({message: error.message, statusCode: '400'});
       return responseMessage;
     } finally {
+      // Workaround for error @grpc/grpc-js: Closing Stream After Unary Call Triggers Double Free
+      // For more info: https://github.com/grpc/grpc-node/issues/1464
+      await new Promise(resolve => setTimeout(resolve, 0));
+
+      // Properly disconnecting from the network
       blockchainClient.disconnectFromNetwork();
     }
 ```
 Now, try to run your business service by running `npm start` from the root directory of your service.
 
-```
-cd ~/Development/blockchain/my-bc-app
-npm start
+```bash
+$ cd ~/Development/blockchain/my-bc-app
+$ npm start
 ```
 
 This will fail with the following error message:
@@ -610,30 +699,31 @@ This will fail with the following error message:
 This is because the `blockchainClient` class uses the `fabric-network` module, which is not added as a dependency yet. To fix this error, open the `package.json` file in Visual Code and add the following line to the `devDependencies` section.
 
 ```
-"fabric-network": "^1.4.4"
+"fabric-network": "^2.2.0"
 ```
 
 This adds the module as a dependency. Next, run `npm install` in the same directory as before.
 
-```
-cd ~/Development/blockchain/my-bc-app
-npm install
+```bash
+$ cd ~/Development/blockchain/my-bc-app
+$ npm install
 ```
 
 When the blockchain network was started for the first time (in [Part 3](#3-build-the-smart-contract) of this pattern), an admin user was registered with our Certificate Authority. Now we need to send an enroll call to the CA server and retrieve the enrollment certificate (eCert) for this user. We won’t delve into enrollment details here, but suffice by saying that the SDK --- and by extension our applications --- need this cert in order to form a user object for the admin. This user object (identity) is needed to connect to the Hyperledger Fabric gateway (see line 30 in the `blockchainClient.ts` file). 
 
 To enroll the admin user, type the following in the `local_fabric` folder of your business service.
 
-```
-cd ~/Development/blockchain/my-bc-app/local_fabric
-node enrollAdmin.js
+```bash
+$ cd ~/Development/blockchain/my-bc-app/local_fabric
+$ npm install
+$ node enrollAdmin.js
 ```
 
 Congratulations!! :+1: We can now start to test the connected business service by running `npm start` in the root folder of your project.
 
-```
-cd ~/Development/blockchain/my-bc-app
-npm start
+```bash
+$ cd ~/Development/blockchain/my-bc-app
+$ npm start
 ```
 
 The service can be accessed on [http://localhost:3000/explorer](http://localhost:3000/explorer). Next, test all transactions to make sure the controllers are properly implemented and can access the smart contract.
@@ -672,15 +762,15 @@ Note the funds object that is part of the project pledge now. If you invoke `tra
 
 As the business service exposes the transactions as RESTful endpoints, it is relatively easy to connect the frontend to it. The most important part is to open up the local running business sevice to the outside world. This is done via a tool called `ngrok`, which can be started by typing 
 
-```
-ngrok http 3000
+```bash
+$ ngrok http 3000
 ```
 
 in a terminal session in your virtual image. The execution of this command results in a secure tunnel that allows communication (HTTP) from the outside world towards your locahost (i.e. in the virtual image) listening on port 3000.
 
 ![](./images/29-connecting-parts-9.png)
 
-The result should look like:
+The result should be similar to:
 
 ![](./images/30-connecting-parts-10.png)
 
