@@ -153,7 +153,8 @@ Try to invoke one of the endpoints, e.g. `/CreateProjectPledge`, by clicking on 
 
 ![](./images/build-service-2.png)
 
-The response will be a '500 Internal Server Error'. This is by design....:smiley: The current implementation of the service throws exactly this error message.
+The response will be a '500 Internal Server Error'. This is by design....:smiley: 
+The current implementation of the service throws exactly this error message.
 
 ```ts
 export class CreateProjectPledgeController {
@@ -214,21 +215,21 @@ It is our job to implement the business service in a meaningful way. This is don
 
 Typically, business rules that need to be executed --- before a transaction can be recorded on the blockchain --- are captured in a so-called smart contract, also referred to as chaincode in Hyperledger Fabric. As this is an important part of our application, it is good to get familiar with the basics of smart contract development in Hyperledger Fabric. 
 
-For this, we will follow the beginner tutorial that is part of the IBM Blockchain extension in Visual Code. After you completed the tutorial you should have a better understanding of how to develop and debug smart contracts, as well as of how to deploy them to your local HyperLedger Fabric network. The IBM blockchain extension itself is built to provide developers an integrated workflow for building blockchain applictions. 
+For this, we will follow three of the basic tutorials that are part of the IBM Blockchain extension in Visual Code. After you completed these tutorials you should have a better understanding of how to develop and debug smart contracts, as well as of how to deploy them to your local HyperLedger Fabric network. The IBM blockchain extension itself is built to provide developers an integrated workflow for building blockchain applictions. 
 
-To get started with the tutorial, click on the Visual Code launcher (1) in your virtual image.
+To get started with these tutorials, click on the Visual Code launcher (1) in your virtual image.
 
 ![](./images/smart-contract-1.png)
 
-Next, click the IBM Blockchain extension on the left-hand side (1), followed by the blockchain icon on the top right (2). This opens the IBM Blockchain Platform welcome page. On this page, click the 'Follow tutorials' link (3) to open the tutorials gallery. 
+Next, click the IBM Blockchain extension on the left-hand side (1), followed by the blockchain icon on the top right (2). This opens the IBM Blockchain Platform welcome page. On this page, click the 'Tutorials' tile (3) to open the tutorials gallery. 
 
 ![](./images/smart-contract-2.png)
 
-Next click the 'Local smart contract development' tutorial. This one takes you through the basics of smart contract development for Fabric. It is highly recommended to complete this tutorial in order to understand the rest of this section.
+Next, complete the tutorials A2, A3 and A4. These tutorials take you through the basics of smart contract development for Fabric and really help you to better understand the rest of this section.
 
 ![](./images/smart-contract-10.png)
 
-At this point, you should have completed the tutorial and gained some basic knowledge on smart contract development. The next step is to build the smart contract for the tracking donations use case. For this, open a terminal session and change directory to `smart-contract` folder in the `hlfabric-lab-code` repo and run the following commands.
+At this point, you should have completed the tutorials and gained some basic knowledge on smart contract development. The next step is to build the smart contract for the tracking donations use case. For this, open a terminal session and change directory to the `smart-contract` folder in the `hlfabric-lab-code` repo and run the following commands.
 
 ```bash
 $ cd ~/Development/blockchain/hlfabric-lab-code/smart-contract
