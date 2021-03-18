@@ -317,21 +317,41 @@ Next, make sure to select the 'V2 channel capabilities' from the drop-down (1).
 
 ![](./images/smart-contract-5.png)
 
-This results in a `global-citizen@0.0.1` package under the 'Smart Contracts' palette. Next, make sure your local fabric is started by checking the 'Fabric Environments' palette. If you see the message '1 Org Local Fabric (click to start)', click that message to start your local blockchain network. 
+This results in a `global-citizen@0.0.1` package in the 'Smart Contracts' palette. Next, make sure your local fabric is started by checking the 'Fabric Environments' palette. If you see the message '1 Org Local Fabric (click to start)', click that message to start your local blockchain network. 
 
-Once the network is started, click instantiate (1). Make sure the `global-citizen@0.0.1` package is selected when asked which package to select. Hit \<Enter\> to accept the defaults on all other questions asked.
+Once the network is started, click 'mychannel' followed by 'Deploy smart contract' (1). 
 
 ![](./images/smart-contract-9.png)
 
-The final step in this section is to test whether the smart contract was successfully deployed. For this, click on the contract in the 'Fabric Gateways' panel (expand 1 Org Local Fabric, then click Org1 Gateway -> mychannel -> global-citizen@0.0.1). Now, click the createProjectPledge (1) method. This opens the Transaction View. 
+At Step 1 of the deployment process, select the packaged version of `global-citizen@0.0.1` (1) from the drop-down and click Next (2). 
+
+![](./images/smart-contract-11.png)
+
+The next step of the deployment wizard allows you to create a smart contract definition. For this workshop we keep all settings default. Click 'Next' (1) to continue.
+
+![](./images/smart-contract-12.png)
+
+and click 'Deploy' to start the deployment of the smart contract to the blockchain network.
+
+![](./images/smart-contract-13.png)
+
+The final step in this section is to test whether the smart contract has been successfully deployed. For this, click on the 'Org1 Gateway' in the 'Fabric Gateways' panel and expand 'mychannel -> global-citizen@0.0.1'. Now, click the createProjectPledge (1) method. This opens the Transaction View. 
 
 ![](./images/smart-contract-6.png)
 
-Pass the argument string `["aid1","001","test","test desc","100000"]` to the function and hit \<Enter\>. Don't provide any transient data when asked for, just hit \<Enter\> to continue.
+Make sure the transaction arguments (1) are as follows:
 
-![](./images/smart-contract-7.png)
+```json
+{
+  "aidOrg": "aid1",
+  "pledgeNumber": "001",
+  "name": "test",
+  "description": "test desc",
+  "fundsRequired": "100000"
+}
+```
 
-The transaction should complete successfully. Finally, test whether you can read the new project pledge by evaluating the `readProjectPledge` function. Pass `["aid1:001"]` as pledgeId and check if the response matches the screenshot below.
+and click 'Submit transaction' (2). The transaction should complete successfully. See the Transaction Output section for details. Finally, test whether you can read the new project pledge by evaluating the `readProjectPledge` function. For this, select the 'readProjectPledge' function from the transaction drop-down (1). Pass `["aid1:001"]` as pledgeId (2) and click (3) to evaluate the transaction. Verify is your response matches the transaction output (4) in the screenshot below.
 
 ![](./images/smart-contract-8.png)
 
