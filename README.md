@@ -70,7 +70,7 @@ Click the 'Get Started' button to continue. Next, provide a unique name (1) for 
 
 ![](./images/nodered-2.png)
 
-To actually deploy the created application to the cloud, click the 'Deploy your app' button (1).
+To actually deploy the created application to the cloud, click the 'Deploy your app' button (1). Note that this button will be grayed out initially and will become active once the cloudant database instance has been successfully provisioned.
 
 ![](./images/nodered-9.png)
 
@@ -84,7 +84,7 @@ On the 'Configure the DevOps toolchain' page, select the region (1) again that m
 
 As the deployment takes a couple of minutes to complete, you might want to move on to [Part 2](#2-build-the-business-service) to create your business service and return later to complete the setup of the frontend service.
 
-Once the deployment successfully completed (1) and the app is awake, click the App URL (2).
+Once the deployment successfully completed (1) and the app is awake, click the App URL (2). If you don't see the App URL, you might need to refresh the page.
 
 ![](./images/nodered-3.png)
 
@@ -114,7 +114,7 @@ This completes the first section. You just created a Node-RED application on IBM
 
 The business service is generated using the so-called LoopBack framework. LoopBack is a highly extensible, open-source Node.js and TypeScript framework based on Express that enables you to quickly create APIs and microservices composed from backend systems such as databases and SOAP or REST services. See the [LoopBack.io](https://loopback.io) site for more information if you want to learn more about this framework.
 
-The application uses two generators, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service. The models and controllers are defined in the `openapi.json` file. For the remaining part of this lab, you'll need to start the virtual image. Once the image is completely up and running, open a terminal session (1). 
+For this workshop, the application uses two generators, the application generator and the OpenAPI generator. The latter generates the models and controllers that are needed by the business service. The models and controllers are defined in the `openapi.json` file. For the remaining part of this lab, you'll need to start the virtual image. Once the image is completely up and running, open a terminal session (1). 
 
 ![](./images/build-service-1.png)
 
@@ -215,7 +215,7 @@ It is our job to implement the business service in a meaningful way. This is don
 
 Typically, business rules that need to be executed --- before a transaction can be recorded on the blockchain --- are captured in a so-called smart contract, also referred to as chaincode in Hyperledger Fabric. As this is an important part of our application, it is good to get familiar with the basics of smart contract development in Hyperledger Fabric. 
 
-For this, we will follow three of the basic tutorials that are part of the IBM Blockchain extension in Visual Code. After you completed these tutorials you should have a better understanding of how to develop and debug smart contracts, as well as of how to deploy them to your local HyperLedger Fabric network. The IBM blockchain extension itself is built to provide developers an integrated workflow for building blockchain applictions. 
+For this, we will follow three of the basic tutorials that are part of the IBM Blockchain extension in Visual Code. After you completed these short tutorials you should have a better understanding of how to develop and debug smart contracts, as well as of how to deploy them to your local HyperLedger Fabric network. The IBM blockchain extension itself is built to provide developers an integrated workflow for building blockchain applictions. 
 
 To get started with these tutorials, click on the Visual Code launcher (1) in your virtual image.
 
@@ -335,11 +335,7 @@ and click 'Deploy' to start the deployment of the smart contract to the blockcha
 
 ![](./images/smart-contract-13.png)
 
-The final step in this section is to test whether the smart contract has been successfully deployed. For this, click on the 'Org1 Gateway' in the 'Fabric Gateways' panel and expand 'mychannel -> global-citizen@0.0.1'. Now, click the createProjectPledge (1) method. This opens the Transaction View. 
-
-![](./images/smart-contract-6.png)
-
-Make sure the transaction arguments (1) are as follows:
+The final step in this section is to test whether the smart contract has been successfully deployed. For this, click on the 'Org1 Gateway' in the 'Fabric Gateways' panel and expand 'mychannel -> global-citizen@0.0.1'. Now, click the createProjectPledge (1) method. This opens the Transaction View. Make sure the transaction arguments (1) are as follows:
 
 ```json
 {
@@ -351,7 +347,11 @@ Make sure the transaction arguments (1) are as follows:
 }
 ```
 
-and click 'Submit transaction' (2). The transaction should complete successfully. See the Transaction Output section for details. Finally, test whether you can read the new project pledge by evaluating the `readProjectPledge` function. For this, select the 'readProjectPledge' function from the transaction drop-down (1). Pass `["aid1:001"]` as pledgeId (2) and click (3) to evaluate the transaction. Verify is your response matches the transaction output (4) in the screenshot below.
+and click 'Submit transaction' (2). 
+
+![](./images/smart-contract-6.png)
+
+The transaction should complete successfully. Finally, test whether you can read the new project pledge by evaluating the `readProjectPledge` function. For this, select the 'readProjectPledge' function from the transaction drop-down (1). Pass `aid1:001` as pledgeId (2) and click (3) to evaluate the transaction. Verify is your response matches the transaction output (4) in the screenshot below.
 
 ![](./images/smart-contract-8.png)
 
