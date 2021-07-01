@@ -42,7 +42,7 @@ or when you prefer not to use a virtual image and wanna set up everything yourse
 </details>
 
 #### IBM Cloud Account
-All options require an IBM Cloud account, so if you don't already have one, you can create one for free at: https://ibm.biz/BdfjsF
+All options require an IBM Cloud account, so if you don't already have one, you can create one for free at: https://ibm.biz/BdfKuH
 
 ## Overview
 The image below depicts a high level overview of the tracking donations scenario and will form the basis of our application. The original idea comes from the 'Tracking Donations with blockchain' code pattern and has been modified so that it can be deployed to the IBM Blockchain Platform service.
